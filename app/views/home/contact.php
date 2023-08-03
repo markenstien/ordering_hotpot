@@ -9,14 +9,8 @@
         </p>
     </div>
 </div>
-
-<!-- Start Map -->
-<div id="mapid" style="width: 100%; height: 300px;"></div>
-
-<!-- Ena Map -->
-
 <!-- Start Contact -->
-<div class="container py-5">
+<div class="container">
     <div class="row py-5">
         <form class="col-md-9 m-auto" method="post" role="form">
             <div class="row">

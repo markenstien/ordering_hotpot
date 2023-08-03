@@ -9,7 +9,7 @@
 			</div>
 			<div class="row">
 				<div class="col-6 col-md-12 col-xl-5">
-					<h3 class="mb-2"><?php echo amountHTML($orderAmountTotal)?></h3>
+					<h3 class="mb-2"><?php echo amountHTML($orderAmountTotal ?? 0)?></h3>
 					<div class="d-flex align-items-baseline">
 						<p class="text-success">
 						<span>Within 30 days</span>

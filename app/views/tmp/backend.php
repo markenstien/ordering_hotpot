@@ -143,17 +143,28 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo _route('transaction:purchase')?>">
-                                    <i class="link-icon" data-feather="box"></i>
-                                    <span class="menu-title">Transaction</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="<?php echo _route('order:index')?>">
                                     <i class="link-icon" data-feather="box"></i>
                                     <span class="menu-title">Orders</span>
                                 </a>
                             </li>
+                            <?php if(isEqual(whoIs('user_type'),'customer')) :?>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="<?php echo _route('home:shop')?>">
+                                      <i class="link-icon" data-feather="box"></i>
+                                      <span class="menu-title">Shop now</span>
+                                  </a>
+                              </li>
+                            <?php endif?>
+                            <?php if(!isEqual(whoIs('user_type'),'customer')) :?>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="<?php echo _route('transaction:purchase')?>">
+                                      <i class="link-icon" data-feather="box"></i>
+                                      <span class="menu-title">Transaction</span>
+                                  </a>
+                              </li>
+                            <?php endif?>
+                            
                             <?php if(isEqual($auth->user_type, ['admin','supervisor'])) :?>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">

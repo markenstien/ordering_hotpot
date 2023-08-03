@@ -15,7 +15,14 @@
               <div>
                 <?php __($form->get('submit')) ?>
               </div>
-              <!-- <a href="<?php echo _route('auth:register')?>" class="d-block mt-3 text-muted">Not a user? Sign up</a> -->
+              <div class="row">
+                <div class="col-md-6">
+                  <a href="<?php echo _route('auth:register')?>" class="d-block mt-3 text-muted">Not a user? Sign up</a>
+                </div>
+                <div class="col-md-6" style="text-align:right;">
+                  <a href="<?php echo _route('auth:forgot-password')?>" class="d-block mt-3 text-muted">Forgot Password?</a>
+                </div>
+              </div>
             <?php __( $form->end() )?>
         </div>
       </div>

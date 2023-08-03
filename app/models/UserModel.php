@@ -38,6 +38,10 @@
 			$fillable_datas = $this->getFillablesOnly($user_data);
 			$validated = $this->validate($fillable_datas, $id);
 
+			if(!$validated) {
+				return false;
+			}
+
 			if(!is_null($id))
 			{
 				//change password also
@@ -48,9 +52,8 @@
 				$user_id = $id;
 			}else
 			{
-				$password = random_letter(6);
 				// $fillable_datas['user_code'] = $this->generateCode($user_data['user_type']);
-				$fillable_datas['password'] = $password;
+				$fillable_datas['password'] = $fillable_datas['password'];
 				$user_id = parent::store($fillable_datas);
 			}
 			
@@ -84,7 +87,7 @@
 
 		private function validate($user_data , $id = null)
 		{
-			if(isset($user_data['email']) && !empty($user_data['username']))
+			if(!empty($user_data['email']))
 			{
 				$is_exist = $this->getByKey('email' , $user_data['email'])[0] ?? '';
 
@@ -94,7 +97,7 @@
 				}
 			}
 
-			if(isset($user_data['username']) && !empty($user_data['username']))
+			if(!empty($user_data['username']))
 			{
 				$is_exist = $this->getByKey('username' , $user_data['username'])[0] ?? '';
 
@@ -104,12 +107,12 @@
 				}
 			}
 
-			if(isset($user_data['phone_number']) && !empty($user_data['username']))
+			if(!empty($user_data['phone']))
 			{
-				$is_exist = $this->getByKey('phone_number' , $user_data['phone_number'])[0] ?? '';
+				$is_exist = $this->getByKey('phone' , $user_data['phone'])[0] ?? '';
 
 				if( $is_exist && !isEqual($is_exist->id , $id) ){
-					$this->addError("Phonne Number {$user_data['phone_number']} already used");
+					$this->addError("Phonne Number {$user_data['phone']} already used");
 					return false;
 				}
 			}

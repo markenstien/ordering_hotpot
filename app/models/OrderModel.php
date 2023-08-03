@@ -5,12 +5,13 @@
     {
         public $table = 'orders';
 
-        public function start($sessionId, $staffId) {
+        public function start($sessionId, $staffId, $customerId) {
 
             return parent::store([
                 'reference' => referenceSeries(parent::lastId(),6,'OR-'),
                 'session_id' => $sessionId,
-                'staff_id' => $staffId,
+                'staff_id' => $staffId ?? null,
+                'customer_id' => $customerId ?? null,
                 'created_at' => now(),
                 'order_status' => 'ongoing'
             ]);
@@ -42,12 +43,14 @@
             ];
         }
 
-        public function placeAndPay($orderData, $paymentData){
+        public function placeAndPay($orderData, $paymentData = null){
 
             if (!isset($orderData['id'])) {
                 $this->addError("Order does not exists...");
                 return false;
             }
+
+            $paymentId = true;
 
             $this->payment = model('PaymentModel');
             $this->item = model('OrderItemModel');
@@ -56,7 +59,11 @@
             $orderData['staff_id'] = whoIs('id');
             $orderData['is_paid'] = true;
             $orderDataUpdate = parent::update($orderData, $orderData['id']);
-            $paymentId = $this->payment->createOrUpdate($paymentData);
+
+            if(!is_null($paymentData)) {
+                $paymentId = $this->payment->createOrUpdate($paymentData);
+            }
+
             if($orderDataUpdate && $paymentId) {
                 $this->addMessage("Order and payment saved");
                 //remove stocks
@@ -70,6 +77,12 @@
 
             $this->addError("Something went wrong!");
             return false;
+        }
+
+        public function searchOrder($orderReference) {
+            return parent::all([
+                'reference' => $orderReference
+            ])[0] ?? false;
         }
 
         public function generateRefence() {

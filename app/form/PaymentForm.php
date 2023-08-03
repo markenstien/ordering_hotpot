@@ -20,6 +20,8 @@
             $this->addRemarks();
             $this->addPaymentMethod();
             $this->addAmount();
+            $this->addReference();
+            $this->addOrganization();
         }
 
         public function addName() {
@@ -93,9 +95,34 @@
                 'options' => [
                     'label' => 'Amount'
                 ],
+                'required' => true,
                 'attributes' => [
-                    'required' => true,
                     'readonly' => true
+                ]
+            ]);
+        }
+
+
+        public function addReference() {
+            $this->add([
+                'type' => 'text',
+                'name' => 'external_reference',
+                'class' => 'form-control',
+                'required' => true,
+                'options' => [
+                    'label' => 'Amount',
+                ]
+            ]);
+        }
+
+        public function addOrganization() {
+            $this->add([
+                'type' => 'text',
+                'name' => 'organization',
+                'class' => 'form-control',
+                'required' => true,
+                'options' => [
+                    'label' => 'Organization',
                 ]
             ]);
         }

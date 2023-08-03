@@ -30,9 +30,8 @@
         public function deleteItem($id) {
             return parent::delete($id);
         }
-        public function addOrUpdatePurchaseItem($orderItemData, $id = null) {
-            
-            $orderItemData = parent::getFillablesOnly($orderItemData);
+        public function addOrUpdatePurchaseItem($orderItemRawData, $id = null) {            
+            $orderItemData = parent::getFillablesOnly($orderItemRawData);
 
             if($this->_validateEntry($orderItemData))
                 return false;
@@ -40,21 +39,21 @@
             if($this->checkItemStock($orderItemData['item_id'], $orderItemData['quantity']) === FALSE) {
                 return false;
             }
+
             if(is_null($id)) {
-                $purchaseSession = OrderService::getPurchaseSession();
+                $purchaseSession = OrderService::getPurchaseSession($orderItemRawData['session_name'] ?? '');
                 if (empty($purchaseSession)) {
-                    $purchaseSession = OrderService::startPurchaseSession();
-                    $order_id = $this->order->start($purchaseSession, whoIs('id'));
+                    $purchaseSession = OrderService::startPurchaseSession($orderItemRawData['session_name'] ?? '');
+                    $order_id = $this->order->start($purchaseSession, $orderItemRawData['staff_id'] ?? '', $orderItemRawData['customer_id'] ?? '');
                 } else {
                     $order_id = $this->order->getBySession($purchaseSession)->id ?? '';
                     if(!$order_id) {
-                        $order_id = $this->order->start($purchaseSession, whoIs('id'));
+                        $order_id = $this->order->start($purchaseSession, $orderItemRawData['staff_id'] ?? '', $orderItemRawData['customer_id'] ?? '');
                     }
                 }
 
                 $orderItemData['sold_price'] = $this->_calculateSoldPrice($orderItemData);
                 $orderItemData['order_id'] = $order_id;
-
                 return parent::store($orderItemData);
             } else {
                 $orderItemData['sold_price'] = $this->_calculateSoldPrice($orderItemData);
@@ -72,15 +71,15 @@
         private function _calculateSoldPrice($orderItemData) {
             $soldPrice = $orderItemData['quantity'] * $orderItemData['price'];
 
-            if($orderItemData['discount_price']) {
+            if(isset($orderItemData['discount_price'])) {
                 $soldPrice = $soldPrice - $orderItemData['discount_price'];
             }
 
             return $soldPrice;
         }
 
-        public function getCurrentSession() {
-            $purchaseSession = OrderService::getPurchaseSession();
+        public function getCurrentSession($name = 'purchase') {
+            $purchaseSession = OrderService::getPurchaseSession($name);
             $this->db->query(
                 "SELECT item.name, item.sku, oi.*
                     FROM {$this->table} as oi 
@@ -95,10 +94,9 @@
             return $this->db->resultSet();
         }
 
-        public function resetPurchaseSession() {
-            $purchaseSession = OrderService::endPurchaseSession();
-            OrderService::startPurchaseSession();
-            // $this->order->reset();
+        public function resetPurchaseSession($name = 'purchase') {
+            $purchaseSession = OrderService::endPurchaseSession($name);
+            OrderService::startPurchaseSession($name);
         }
 
         public function getItemSummary($items = []) {
@@ -107,7 +105,6 @@
                 'grossAmount' => 0,
                 'netAmount' =>  0
             ];
-
             if (!empty($items)) {
                 foreach ($items as $key => $row) {
                     $retVal['discountAmount'] += $row->discount_price;
@@ -122,8 +119,8 @@
             return $this->getItemSummary($items)['netAmount'];
         }
 
-        public function getCurrentSessionId() {
-            $purchaseSession = OrderService::getPurchaseSession();
+        public function getCurrentSessionId($name = 'purchase') {
+            $purchaseSession = OrderService::getPurchaseSession($name);
 
             if(!$purchaseSession)
                 return false;

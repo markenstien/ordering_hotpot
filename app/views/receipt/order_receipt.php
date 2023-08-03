@@ -33,7 +33,10 @@
                     <?php foreach($items as $key => $row):?>
                         <tr>
                             <td><?php echo $row->quantity?></td>
-                            <td><?php echo $row->name?></td>
+                            <td>
+                                <?php echo $row->name?>
+                                <div><?php echo wLinkDefault( _route('home:catalog-view', $row->item_id), 'Show Item')?></div>
+                            </td>
                             <td><?php echo amountHTML($row->price)?></td>
                             <td>
                                 <?php echo amountHTML($row->sold_price)?>
@@ -55,23 +58,89 @@
             <section>
                 <h1>Total : <?php echo amountHTML($order->net_amount)?></h1>
             </section>
-
+            
+            <?php if($payment) :?>
             <section class="mt-2">
-                <h3>Payment</h3>
-                <p>Total : 
-                    #<?php echo $payment->reference?>(Keep this reference number) Total Amount Paid : <?php echo amountHTML($payment->amount)?> | Method : <?php echo $payment->payment_method?>
-                    <?php
-                        if($payment->organization) {
-                            echo '| ORG : '. $payment->organization . ' | REFERENCE : '. $payment->external_reference;
-                        }
-                    ?>
-                </p>
+                <div class="row">
+                    <div class="col-md-5">
+                        <table class="table-bordered table">
+                            <tr>
+                                <td>Reference #</td>
+                                <td><?php echo $payment->reference?></td>
+                            </tr>
+                            <tr>
+                                <td>Amount Paid</td>
+                                <td><?php echo $payment->amount?></td>
+                            </tr>
+                            <tr>
+                                <td>Remarks</td>
+                                <td><?php echo $payment->remarks?></td>
+                            </tr>
+
+                            <?php if(!empty($payment->organization)) :?>
+                                <tr>
+                                    <td>Organization / Bank Name / Wallet Name</td>
+                                    <td><?php echo $payment->organization?></td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Reference</td>
+                                    <td><?php echo $payment->external_reference?></td>
+                                </tr>
+                            <?php endif?>
+                        </table>
+                    </div>
+
+                    <?php if($paymentImage) :?>
+                        <div class="col-md-7">
+                            <img src="<?php echo $paymentImage->full_url?>" alt="Payment Image" style="width:100%">
+                        </div>
+                    <?php endif?>
+                </div>
             </section>
+            <?php endif?>
 
             <section class="mt-5">
-                <a href="<?php echo _route('transaction:purchase')?>" class="btn btn-primary btn-sm">Back</a>
+                <?php if(empty(whoIs())) :?>
+                    <a href="<?php echo _route('home:shop')?>" class="btn btn-primary btn-sm">Back</a>
+                <?php else:?>
+                    <a href="<?php echo _route('transaction:purchase')?>" class="btn btn-primary btn-sm">Back</a>
+                <?php endif?>
+                
+                <?php if(!$payment) :?>
+                    <?php echo wLinkDefault('#', 'Pay Now', [
+                        'class' => 'btn btn-primary btn-sm',
+                        'data-bs-toggle' => 'modal',
+                        'data-bs-target' => '#addPayment'
+                    ])?>
+                <?php endif?>
+                <!-- paymentForm
+                paymentOnlineForm -->
             </section>
         </div>
     </div>
+
+    <div class="modal fade" id="addPayment" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Payment Form</h5>
+                <button type="button" class="btn-close" 
+                    data-bs-dismiss="modal" aria-label="btn-close"></button>
+            </div>
+            <div class="modal-body">
+                <?php echo $paymentForm->start()?>
+                    <?php echo $paymentForm->getCol('order_id')?>
+                    <?php echo $paymentForm->getCol('payer_name')?>
+                    <?php echo $paymentForm->getCol('amount')?>
+                    <?php echo $paymentOnlineForm->getCol('external_reference')?>
+                    <?php echo $paymentOnlineForm->getCol('organization')?>
+                    <?php echo $_attachmentForm->getCol('file')?>
+
+                    <input type="submit" name="" value="Add Payment" class="btn btn-primary btn-sm mt-3">
+                <?php echo $paymentForm->end()?>
+            </div>
+        </div>
+        </div>
+    </div>
 <?php endbuild()?>
-<?php loadTo('tmp/basic')?>
+<?php loadTo()?>

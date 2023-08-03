@@ -36,6 +36,7 @@
 		'login' => $controller.'/login',
 		'register' => $controller.'/register',
 		'logout' => $controller.'/logout',
+		'forgot-password' => $controller .'/forgotPassword'
 	];
 
 	$controller = '/AttachmentController';
@@ -218,7 +219,13 @@
 		'checkout' => 'checkout',
 		'about' => 'about',
 		'contact' => 'contact',
-		'catalog-view' => 'showCatalog'
+		'catalog-view' => 'showCatalog',
+		'track-order' => 'trackOrder'
+	]);
+
+	_routeInstance('cart', 'CartController', $routes, [
+		'add' => 'addToCart',
+		'checkout' => 'checkout'
 	]);
 
 	return $routes;

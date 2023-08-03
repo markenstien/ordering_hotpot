@@ -2,18 +2,18 @@
     namespace Services;
     use Session;
     class OrderService {
-        public static function startPurchaseSession(){
+        public static function startPurchaseSession($name = 'purchase'){
             $token = get_token_random_char(20);
-            Session::set('purchase', $token);
+            Session::set($name, $token);
             return $token;
         }
 
-        public static function endPurchaseSession(){
-            Session::remove('purchase');
+        public static function endPurchaseSession($name = 'purchase'){
+            Session::remove($name);
         }
 
-        public static function getPurchaseSession(){
-            return Session::get('purchase');
+        public static function getPurchaseSession($name = 'purchase'){
+            return Session::get($name);
         }
         
         public function getOrdersWithin30days($endDate) {
@@ -28,7 +28,6 @@
                 ]
             ]);
 
-            return $items;
             $summary = $orderItemModel->getItemSummary($items); 
             return $summary['netAmount'];
         }

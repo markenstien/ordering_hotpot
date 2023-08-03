@@ -68,6 +68,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo _route('home:contact')?>">Contact</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo _route('home:track-order')?>">Order Tracking</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
@@ -82,14 +85,21 @@
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="<?php echo _route('cart:index')?>">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                        <!-- <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span> -->
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="<?php echo _route('auth:login')?>">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
-                    </a>
+                    <?php if(empty(whoIs())) :?>
+                        <a class="nav-icon position-relative text-decoration-none" href="<?php echo _route('auth:login')?>">
+                            <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        </a>
+                    <?php else:?>
+                        <a class="nav-icon position-relative text-decoration-none" href="<?php echo _route('dashboard:index')?>">
+                            <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        </a>
+                    <?php endif?>
                 </div>
             </div>
 
@@ -103,7 +113,7 @@
             <div class="w-100 pt-1 mb-5 text-right">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+            <form action="<?php echo _route('home:shop')?>" method="get" class="modal-content modal-body border-0 p-0">
                 <div class="input-group mb-2">
                     <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
                     <button type="submit" class="input-group-text bg-success text-light">
@@ -113,10 +123,7 @@
             </form>
         </div>
     </div>
-
     <?php produce('content') ?>
-
-
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">

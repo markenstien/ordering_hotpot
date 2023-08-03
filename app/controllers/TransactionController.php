@@ -24,7 +24,6 @@
          */
         public function purchase() {
             $purchaseSession = OrderService::getPurchaseSession();
-
             if (empty($purchaseSession)) {
                 OrderService::startPurchaseSession();
             }

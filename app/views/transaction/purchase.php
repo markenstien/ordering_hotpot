@@ -124,7 +124,13 @@
                 <div class="card-body">
                     <?php echo $paymentForm->start()?>
                         <h4>Payment</h4>
-                        <?php echo $paymentForm->getFormItems();?>
+                        <?php
+                            echo $paymentForm->getRow('payer_name');
+                            echo $paymentForm->getRow('mobile_number');
+                            echo $paymentForm->getRow('address');
+                            echo $paymentForm->getRow('payment_method');
+                            echo $paymentForm->getRow('amount');
+                        ?>
                         <section id="onlinePaymentMeta">
                             <h4 class="mb-2">Online Payment Details</h4>
                             <div class="form-group">

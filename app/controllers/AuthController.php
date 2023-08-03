@@ -1,8 +1,9 @@
 <?php 
-	
+	load(['UserService'], SERVICES);
 	load(['UserForm'] , APPROOT.DS.'form');
 
 	use Form\UserForm;
+	use Services\UserService;
 
 	class AuthController extends Controller
 	{	
@@ -20,7 +21,7 @@
 
 		public function login()
 		{
-			if( isSubmitted() )
+			if(isSubmitted())
 			{
 				$post = request()->posts();
 
@@ -51,6 +52,35 @@
 			];
 
 			return $this->view('auth/login' , $data);
+		}
+
+
+		public function register() {
+
+			if(isSubmitted()) {
+				$post = request()->posts();
+				$post['user_type'] = UserService::USER_CUSTOMER;
+				$res = $this->user->save($post);
+
+				if($res) {
+					Flash::set("Your account has been created");
+					return redirect(_route('auth:login'));
+				} else {
+					Flash::set($this->user->getErrorString(), 'danger');
+					return request()->return();
+				}
+			}
+
+			$form = $this->_form;
+
+			$form->init([
+				'url' => _route('auth:register')
+			]);
+
+			$form->customSubmit('Register' , 'submit' , ['class' => 'btn btn-primary btn-sm']);
+
+			$this->data['form'] = $form;
+			return $this->view('auth/register', $this->data);
 		}
 
 		public function logout()

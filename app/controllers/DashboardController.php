@@ -15,12 +15,9 @@
 			$this->data['page_title'] = 'Dashboard';
 			$this->data['totalItem'] = $this->itemModel->totalItem();
 			$this->data['totalUser'] = $this->user_model->totalUser();
-			
-			$orderService = new OrderService();
-			$items = $orderService->getOrdersWithin30days(date('Y-m-d'));
 
-			$this->data['orderAmountTotal'] = $this->orderItemModel->getItemSummary($items)['netAmount'];
-			$this->data['items'] = $items;
+			$this->data['items'] = [];
+			
 			return $this->view('dashboard/index', $this->data);
 		}
 	}

@@ -8,7 +8,6 @@
             'reference',
             'amount',
             'payment_method',
-            'payer_name',
             'mobile_number',
             'address',
             'remarks',

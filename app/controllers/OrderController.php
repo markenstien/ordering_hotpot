@@ -7,7 +7,13 @@
             $this->model = model('OrderModel');
         }
         public function index() {
-            $this->data['orders'] = $this->model->all(null, 'id desc');
+            if(isEqual(whoIs('user_type'),'customer')) {
+                $this->data['orders'] = $this->model->all([
+                    'customer_id' => whoIs('id')
+                ], 'id desc');
+            } else {
+                $this->data['orders'] = $this->model->all(null, 'id desc');
+            }
             return $this->view('order/index', $this->data);
         }
 
