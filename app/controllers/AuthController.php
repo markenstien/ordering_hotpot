@@ -111,9 +111,7 @@
 			$emailContent .= " Click this {$link} or use this code to activate your account : ==> ".$this->meta->retVal['code'];
 
 			$emailBody = wEmailComplete($emailContent);
-			// _mail($user->email, 'ACCOUNT VERIFICATION', $emailBody);
-
-			echo $emailBody;die();
+			_mail($user->email, 'ACCOUNT VERIFICATION', $emailBody);
 
 			Flash::set("User has been created, verification link and code has been sent to your email '{$user->email}'");
 			return redirect(_route('auth:code'));
