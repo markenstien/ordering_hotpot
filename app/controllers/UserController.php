@@ -12,6 +12,7 @@
 			
 			$this->data['page_title'] = ' Users ';
 			$this->data['user_form'] = new UserForm();
+			$this->modelOrder = model('OrderModel');
 		}
 
 		public function index()
@@ -108,13 +109,17 @@
 			$this->data['user'] = $user;
 			$this->data['is_admin'] = $this->is_admin;
 
-			$number_of_days_after_deployment = null;
-			$number_of_days_remaining = null;
-			
-			$this->data['number_of_days_remaining'] = $number_of_days_remaining;
-			$this->data['number_of_days_after_deployment'] = $number_of_days_after_deployment;
+			$this->data['orders'] = $this->modelOrder->all([
+				'customer_id' => whoIs('id')
+			], 'id desc');
 
+			$this->data['req'] = request()->inputs();
+			$this->data['id'] = $id;
 			return $this->view('user/show' , $this->data);
+		}
+
+		public function profile() {
+
 		}
 
 		public function sendCredential($id)

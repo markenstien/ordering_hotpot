@@ -52,7 +52,6 @@
 				$user_id = $id;
 			}else
 			{
-				// $fillable_datas['user_code'] = $this->generateCode($user_data['user_type']);
 				$fillable_datas['password'] = $fillable_datas['password'];
 				$user_id = parent::store($fillable_datas);
 			}

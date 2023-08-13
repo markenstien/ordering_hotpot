@@ -11,17 +11,13 @@
 			<div class="container">
 				<div class="row p-5">
 					<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-						<img class="img-fluid" src="./assets/img/banner_img_01.jpg" alt="">
+						<img class="img-fluid" src="<?php echo _path_upload_get('background_a.jpg')?>" alt="">
 					</div>
 					<div class="col-lg-6 mb-0 d-flex align-items-center">
 						<div class="text-align-left align-self-center">
 							<h1 class="h1 text-success"><?php echo COMPANY_NAME?></h1>
-							<h3 class="h2">Tiny and Perfect eCommerce Template</h3>
-							<p>
-								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio architecto sapiente, 
-								sint odio deserunt debitis reiciendis aut accusantium consequuntur molestias. 
-								Porro fugiat ut eveniet cum vitae nam error numquam reiciendis!
-							</p>
+							<h3 class="h2">Fast and Excellent Delivery</h3>
+							<p>Delivering speed and reliability</p>
 						</div>
 					</div>
 				</div>
@@ -31,17 +27,12 @@
 			<div class="container">
 				<div class="row p-5">
 					<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-						<img class="img-fluid" src="./assets/img/banner_img_02.jpg" alt="">
+						<img class="img-fluid" src="<?php echo _path_upload_get('background_b.jpg')?>" alt="">
 					</div>
 					<div class="col-lg-6 mb-0 d-flex align-items-center">
 						<div class="text-align-left">
-							<h1 class="h1">Proident occaecat</h1>
-							<h3 class="h2">Aliquip ex ea commodo consequat</h3>
-							<p>
-								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio architecto sapiente, 
-								sint odio deserunt debitis reiciendis aut accusantium consequuntur molestias. 
-								Porro fugiat ut eveniet cum vitae nam error numquam reiciendis!
-							</p>
+							<h1 class="h1">Always new and Affordable</h1>
+							<h3 class="h2">Our prices make your hearts healthy too.</h3>
 						</div>
 					</div>
 				</div>
@@ -51,17 +42,12 @@
 			<div class="container">
 				<div class="row p-5">
 					<div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-						<img class="img-fluid" src="./assets/img/banner_img_03.jpg" alt="">
+						<img class="img-fluid" src="<?php echo _path_upload_get('background_c.jpg')?>" alt="">
 					</div>
 					<div class="col-lg-6 mb-0 d-flex align-items-center">
 						<div class="text-align-left">
-							<h1 class="h1">Repr in voluptate</h1>
-							<h3 class="h2">Ullamco laboris nisi ut </h3>
-							<p>
-								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio architecto sapiente, 
-								sint odio deserunt debitis reiciendis aut accusantium consequuntur molestias. 
-								Porro fugiat ut eveniet cum vitae nam error numquam reiciendis!
-							</p>
+							<h1 class="h1">Expert Pharmacy technicians</h1>
+							<h3 class="h2">Your Neighborhood Pharmacy, Your Health Advocate.</h3>
 						</div>
 					</div>
 				</div>
@@ -76,6 +62,26 @@
 	</a>
 </div>
 <!-- End Banner Hero -->
+
+<!-- Start Section -->
+<section class="container py-5">
+    <div class="row text-center pt-5 pb-3">
+        <div class="col-lg-6 m-auto">
+            <h1 class="h1">About our Company</h1>
+            <p>
+				The Cadaceous Drug and Medica Supplies opened in 1998. Every
+				day, the pharmacy sells thousands of medications, supplying all the
+				residents in the surrounding districts.
+            </p>
+			<p>
+				One branch is situated in
+				Quezon City, in the NCR region of the Philippines, and the other is
+				situated in Bulacan, in Central Luzon.
+			</p>
+        </div>
+    </div>
+</section>
+<!-- End Section -->
 
 
 <!-- End Featured Product -->

@@ -26,7 +26,7 @@
 			$this->addEmail();
 			$this->addAddress();
 
-			$this->addUsername();
+			// $this->addUsername();
 			$this->addPassword();
 			$this->addUserType();
 			$this->addProfile();

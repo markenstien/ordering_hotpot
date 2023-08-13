@@ -103,7 +103,9 @@
 		return Session::get('csrfToken');
 	}
 	function csrfReload(){
-		return Session::set('csrfToken' , get_token_random_char(20));
+		$token = get_token_random_char(20);
+		Session::set('csrfToken', $token);
+		return $token;
 	}
 	
 	function csrfValidate()

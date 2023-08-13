@@ -5,6 +5,8 @@
         <div class="card-body">
             <?php Flash::show()?>
             <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
+            <img src="<?php echo _path_upload_get('cadaceous_logo.png');?>" alt="<?php echo COMPANY_NAME?> Logo"
+              style="width:150px; margin:0px auto; display:block">
             <?php  __( $form->start() ); ?>
               <div class="mb-3">
                 <?php __( $form->getCol('email' , ['required' => true]) ); ?>
@@ -20,7 +22,7 @@
                   <a href="<?php echo _route('auth:register')?>" class="d-block mt-3 text-muted">Not a user? Sign up</a>
                 </div>
                 <div class="col-md-6" style="text-align:right;">
-                  <a href="<?php echo _route('auth:forgot-password')?>" class="d-block mt-3 text-muted">Forgot Password?</a>
+                  <a href="<?php echo _route('forget-pw:index')?>" class="d-block mt-3 text-muted">Forgot Password?</a>
                 </div>
               </div>
             <?php __( $form->end() )?>

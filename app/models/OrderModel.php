@@ -57,7 +57,7 @@
 
             $orderData['date_time'] = now();
             $orderData['staff_id'] = whoIs('id');
-            $orderData['is_paid'] = true;
+            $orderData['is_paid'] = false;
             $orderDataUpdate = parent::update($orderData, $orderData['id']);
 
             if(!is_null($paymentData)) {

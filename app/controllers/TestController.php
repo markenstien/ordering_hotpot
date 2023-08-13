@@ -6,13 +6,8 @@
 
 		public function index()
 		{
-			$comparison = '<';
+			$test = "300.31";
 
-			if( 10 $comparison 10)
-			{
-				echo 'ok!';
-			}else{
-				echo 'not ok1';
-			}
+			var_dump(floatval($test) - 100);
 		}
 	}

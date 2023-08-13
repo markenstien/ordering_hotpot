@@ -11,6 +11,7 @@
 
 		//temporary
 		public $is_admin = false;
+		public $retVal  = [];
 
 		public function __construct()
 		{

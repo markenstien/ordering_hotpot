@@ -30,7 +30,7 @@
                         ], 'file');
                     }
 
-                    return redirect(_route('order:show', $post['order_id']));
+                    return redirect(_route('receipt:order', $post['order_id']));
                 } else {
                     Flash::set("Something went wrong!", 'danger');
                     return request()->return();
@@ -46,5 +46,20 @@
         public function show($id) {
             $this->data['payment'] = $this->model->get($id);
             return $this->view('payment/show', $this->data);
+        }
+
+
+        public function approve($id) {
+            $req = request()->inputs();
+            csrfValidate();
+            $res = $this->model->approve($id);
+
+            if(!$res) {
+                Flash::set($this->model->getErrorString(), 'danger');
+            }else{
+                Flash::set($this->model->getMessageString());
+            }
+
+            return redirect(_route('receipt:order', $id));
         }
     }

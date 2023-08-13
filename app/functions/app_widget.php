@@ -161,6 +161,12 @@
         return $retVal;
     }
 
+    function wBadgeWrap($text, $type) {
+        return <<<EOF
+            <span class='badge bg-{$type}'>{$text}</span>
+        EOF;
+    }
+
     
 
     function wDivider($height = 30)

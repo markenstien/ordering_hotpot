@@ -5,109 +5,101 @@
 			<div class="card">
 				<div class="card-header">
 					<h4 class="card-title">User Preview</h4>
-					<a href="<?php echo _route('user:edit' , $user->id)?>">Edit</a>
+					<?php echo wLinkDefault(_route('user:edit', $user->id), 'Edit User', [
+						'icon' => 'edit'
+					])?>
 				</div>
 
 				<div class="card-body">
-					<h4>Personal Information</h4>
-					<div>
-						<img src="<?php echo $user->profile?>" style="width: 150px;">
-					</div>
-					<!-- <div>
-						<label class="tx-11">Reference</label>
-						<p><?php echo $user->user_code?></p>
-					</div> -->
-					<div>
-						<label class="tx-11">Name</label>
-						<p><?php echo $user->lastname . ',' . $user->firstname?></p>
-					</div>
-					<div>
-						<label class="tx-11">Gender</label>
-						<p><?php echo $user->gender?></p>
-					</div>
-					<div>
-						<label class="tx-11">Email And Mobile Number</label>
-						<p><?php echo $user->email?></p>
-						<p><?php echo $user->phone?></p>
+					<div><img src="<?php echo $user->profile?>" style="width: 150px;"></div>
+					<span class="badge badge-primary">USERID : #<?php echo $user->user_identification?></span>
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<tr>
+								<td style="width:35%">Name</td>
+								<td><?php echo $user->lastname . ',' . $user->firstname?></td>
+							</tr>
+							<tr>
+								<td style="width:35%">Gender</td>
+								<td><?php echo $user->gender?></td>
+							</tr>
+							<tr>
+								<td style="width:35%">Email</td>
+								<td><?php echo $user->email?></td>
+							</tr>
+							<?php if(!empty($user->phone)) :?>
+							<tr>
+								<td style="width:35%">Phone</td>
+								<td><?php echo $user->phone?></td>
+							</tr>
+							<?php endif?>
 
-						<span><a href="<?php echo _route('user:sendCredential' , $user->id)?>" title="Click to send the credential to the user">Send Credentials to User :</a><?php echo $user->email?></span>
+							<?php if(!empty($user->address)) :?>
+							<tr>
+								<td style="width:35%">Address</td>
+								<td><?php echo $user->address?></td>
+							</tr>
+							<?php endif?>
+						</table>
 					</div>
-					<div>
-						<label class="tx-11">Address</label>
-						<p><?php echo "$user->address"?></p>
-					</div>
-					<hr>
-					<?php if($is_admin && !isEqual($user->user_type , 'admin')) :?>
-						<div>
-							<h4 class="bg-danger">Danger Zone</h4>
-							<hr>
-							<a href="<?php echo _route('user:delete' , $user->id , [
-								'route' => seal( _route('user:index') )
-							])?>" class="btn btn-danger btn-sm form-verify"> Delete User </a>
-						</div>
-					<?php endif?>
 				</div>
 			</div>	
+		</div>
+
+		<div class="col-md-8">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="card-title">Order History</h4>
+				</div>
+
+				<div class="card-body">
+					<?php if(isEqual(whoIs('user_type'),['admin','staff']) || isEqual(whoIs('id'), $id)) :?>
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+								<th>#</th>
+								<th>Reference</th>
+								<th>Date</th>
+								<th>Total</th>
+								<th>Payment</th>
+								<th>Action</th>
+							</thead>
+
+							<tbody>
+								<?php foreach($orders as $key => $row) :?>
+									<tr>
+										<td><?php echo ++$key?></td>
+										<td><?php echo $row->reference?></td>
+										<td><?php echo $row->created_at?></td>
+										<td><?php echo amountHTML($row->net_amount)?></td>
+										<td>
+											<?php
+												$color = 'danger';
+												$text  = 'Unpaid';
+												if($row->is_paid) {
+													$color = 'success';
+													$text = 'Paid';
+												}
+
+												echo wBadgeWrap($text, $color);
+											?>
+										</td>
+										<td>
+											<?php echo wLinkDefault(_route('receipt:order', $row->id), ' Show Order');?>
+										</td>
+									</tr>
+								<?php endforeach?>
+							</tbody>
+						</table>
+					</div>
+					<?php else:?>
+						<p>Order History is set to private</p>
+					<?php endif?>
+				</div>
+			</div>
 		</div>
 	</div>
 
 
-	<!-- SEND LAB RESULT TO EMAIL -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">EMAIL ABOUT QUARANTINE STATUS</h5>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
-	      </div>
-	      <div class="modal-body">
-	      	<form method="post" action="<?php echo _route('mailer:send')?>">
-
-	      		<input type="hidden" name="route" value="<?php echo seal( _route('user:show' , $user->id) ) ?>">
-	      		<h5 class="mb-2">Send To Email</h5>
-
-
-	      		<input type="hidden" name="lab_id" value="<?php echo $lab_result->id?>">
-
-	      		<div class="form-group">
-	      			<label>Subject</label>
-	      			<?php Form::textarea('subject' , " Hey !".$user->first_name, ['class' => 'form-control' , 
-	      			'rows' => 1 , 'placeholder' => $user->first_name . ', Enter Motivating Subject'])?>
-
-	      			<small>Seperate Emails with (,) to send on multiple recipients</small>
-	      		</div>
-
-
-	      		<div class="form-group">
-	      			<label>Email</label>
-	      			<?php Form::textarea('recipients' , $user->email , ['class' => 'form-control' , 
-	      			'rows' => 1 , 'placeholder' => 'eg.'.$user->email])?>
-
-	      			<small>Seperate Emails with (,) to send on multiple recipients</small>
-	      		</div>
-
-	      		<div class="form-group">
-	      			<label>Additional Notes</label>
-	      			<?php
-	      				$message = "Good day ".$user->first_name .',';
-	      				$message .= ' '.COMPANY_NAME . ' Would like to extend our support to your quarantine';
-	      				$message .= " We are also emailing you to update you that you are ".$number_of_days_remaining ." days away before completing your quarantine";
-	      			?>
-	      			<?php Form::textarea('body' , $message , ['class' => 'form-control' , 
-	      			'rows' => 3 , 'placeholder' => 'some-text' ])?>
-
-	      			<small>Seperate Emails with (,) to send on multiple recipients</small>
-	      		</div>
-
-	      		<input type="submit" name="" class="btn btn-primary" value="Send">
-	      	</form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<!-- -->
 <?php endbuild()?>
 <?php loadTo()?>

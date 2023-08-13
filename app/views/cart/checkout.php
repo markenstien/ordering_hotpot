@@ -69,13 +69,21 @@
 			<div class="card-footer">
 				<div class="row">
 					<div class="col-md-6">
-						<input type="submit" name="btn_checkout" class="btn btn-primary btn-lg" value="Checkout">
+						<?php if(empty(whoIs())) :?>
+							<h3 class="text-danger">You must have an account to proceed checkout</h3>
+							<?php echo wLinkDefault(_route('auth:register'), 'Create your Account here.')?>
+						<?php else :?>
+							<input type="submit" name="btn_checkout" class="btn btn-primary btn-lg" value="Checkout">
+						<?php endif?>
 					</div>
 					<div class="col-md-6" style="text-align:right">
 						<h3><?php echo amountHTML($totalAmount)?></h3>
 					</div>
 				</div>
 			</div>
+
+			<img src="<?php echo _path_upload_get('cadaceous_logo.png');?>" alt="<?php echo COMPANY_NAME?> Logo"
+              style="width:150px; margin:0px auto; display:block">
 		</div>
 		<?php Form::close()?>
 	</div>

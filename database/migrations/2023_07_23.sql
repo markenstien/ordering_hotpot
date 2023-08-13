@@ -6,3 +6,6 @@ alter table items
 alter table items 
     add column packing tinyint,
     add column qty_per_case tinyint;
+
+
+alter table users add column user_type char(50);

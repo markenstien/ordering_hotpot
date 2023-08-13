@@ -7,12 +7,12 @@
     define('DEFAULT_REPLY_TO' , '');
 
     const MAILER_AUTH = [
-        'username' => '#',
-        'password' => '#',
-        'host'     => '#',
-        'name'     => '#',
-        'replyTo'  => '#',
-        'replyToName' => '#'
+        'username' => 'main@medicad.store',
+        'password' => 'tmKcD#t3o@Y@',
+        'host'     => 'medicad.store',
+        'name'     => 'Medicad',
+        'replyTo'  => 'main@medicad.store',
+        'replyToName' => 'Medicad'
     ];
 
 

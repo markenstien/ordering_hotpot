@@ -43,6 +43,12 @@
                 'value' => $id
             ]);
 
+            $this->paymentForm->add([
+                'type' => 'hidden',
+                'name' => 'payment_type',
+                'value' => 'ONLINE'
+            ]);
+
             $this->data['paymentForm'] = $this->paymentForm;
 
             $this->data['order'] = $order['order'];

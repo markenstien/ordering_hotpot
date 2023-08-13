@@ -2,6 +2,17 @@
 	
 	$routes = [];
 
+	$controller = '/ForgetPasswordController';
+	$routes['forget-pw'] = [
+		'index' => $controller.'/index',
+		'edit' => $controller.'/edit',
+		'create' => $controller.'/create',
+		'delete' => $controller.'/destroy',
+		'send'   => $controller.'/send',
+		'resetPassword' => $controller .'/resetPassword '
+	];
+
+	
 	$controller = '/MailerController';
 	$routes['mailer'] = [
 		'index' => $controller.'/index',
@@ -18,7 +29,8 @@
 		'create' => $controller.'/create',
 		'delete' => $controller.'/destroy',
 		'show'   => $controller.'/show',
-		'sendCredential' => $controller.'/sendCredential'
+		'sendCredential' => $controller.'/sendCredential',
+		'profile' => $controller . '/profile'
 	];
 
 	$controller = '/StockController';
@@ -36,7 +48,8 @@
 		'login' => $controller.'/login',
 		'register' => $controller.'/register',
 		'logout' => $controller.'/logout',
-		'forgot-password' => $controller .'/forgotPassword'
+		'forgot-password' => $controller .'/forgotPassword',
+		'code'  => $controller.'/code'
 	];
 
 	$controller = '/AttachmentController';
@@ -108,7 +121,8 @@
 		'order' => $controller.'/orderReceipt',
 		'create' => $controller.'/create',
 		'delete' => $controller.'/destroy',
-		'show'   => $controller.'/show'
+		'show'   => $controller.'/show',
+		'approve' => $controller .'/approve'
 	];
 
 	$controller = '/SupplyOrderController';

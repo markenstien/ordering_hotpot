@@ -23,6 +23,15 @@
          * purchasing action
          */
         public function purchase() {
+            if(!isEqual(whoIs('user_type'), ['admin','staff'])) {
+                if(!empty(whoIs())) {
+                    Flash::set("Un-Authorized Access" ,'danger');
+                    return redirect(_route('user:show', whoIs('id')));
+                } else {
+                    Flash::set("Unable to access page", 'danger');
+                    return redirect(_route('auth:login'));
+                }
+            }
             $purchaseSession = OrderService::getPurchaseSession();
             if (empty($purchaseSession)) {
                 OrderService::startPurchaseSession();

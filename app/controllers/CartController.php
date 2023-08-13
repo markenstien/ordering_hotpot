@@ -65,11 +65,12 @@
                     'gross_amount' => $itemSummary['grossAmount'],
                     'net_amount' => $itemSummary['netAmount'],
                     'discount_amount' => $itemSummary['discountAmount'],
-                    'id' => $session
+                    'id' => $session,
+					'customer_id' => whoIs('id')
                 ];
                 
 
-                $result = $this->modelOrder->placeAndPay($orderData, $paymentData);
+                $result = $this->modelOrder->placeAndPay($orderData, null);
                 
                 if($result) {
                     OrderService::endPurchaseSession('cart');
@@ -95,7 +96,7 @@
 			$this->data['items'] = $items;
 			$this->data['formPayment'] = $this->formPayment;
 
-
+			$this->data['whoIs'] = whoIs();
 			return $this->view('cart/checkout', $this->data);
 		}
 
