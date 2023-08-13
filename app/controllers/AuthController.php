@@ -114,7 +114,7 @@
 			_mail($user->email, 'ACCOUNT VERIFICATION', $emailBody);
 
 			Flash::set("User has been created, verification link and code has been sent to your email '{$user->email}'");
-			return redirect(_route('auth:code'));
+			return redirect(_route('auth:login'));
 		}
 		public function code() {
 			$req = request()->inputs();
