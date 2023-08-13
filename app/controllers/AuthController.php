@@ -108,10 +108,12 @@
 			$emailContent = " Good day <strong>{$user->firstname}</strong>,<br/>";
 			$emailContent .= " You Recieved this email because you used your email to register on ". COMPANY_NAME .'<br/>';
 			$emailContent .= " Verify your registration to enjoy Always new and affordable drug, prices make your hearts healthy too. <br/></br>";
-			$emailContent .= " Click this {$link} or use this code to activate your account".$this->meta->retVal['code'];
+			$emailContent .= " Click this {$link} or use this code to activate your account : ==> ".$this->meta->retVal['code'];
 
 			$emailBody = wEmailComplete($emailContent);
-			_mail($user->email, 'ACCOUNT VERIFICATION', $emailBody);
+			// _mail($user->email, 'ACCOUNT VERIFICATION', $emailBody);
+
+			echo $emailBody;die();
 
 			Flash::set("User has been created, verification link and code has been sent to your email '{$user->email}'");
 			return redirect(_route('auth:code'));
@@ -119,38 +121,38 @@
 		public function code() {
 			$req = request()->inputs();
 			if(isSubmitted()) {
-				$code = request()->post('verification_code');
+				$post = request()->posts();
+				$code = $post['verification_code'];
+
 				$codeValue = $this->meta->single([
 					'meta_value' => $code
 				]);
+
+				if(!empty($codeValue)) {
+					$isOkay = $this->user->dbHelper->update(...[
+						$this->user->table,
+						['is_verified' => 1],
+						$this->user->conditionConvert([
+							'id' => $codeValue->id
+						])
+					]);
+
+					$this->meta->delete($codeValue->id);
+
+					if($isOkay) {
+						Flash::set("Account Verified");
+						$this->user->startAuth($codeValue->parent_id);
+						return redirect(_route('user:show', $codeValue->parent_id));
+					}
+				} else {
+					Flash::set("Request code not exist Action failed", 'danger');
+					return redirect(_route('auth:login'));
+				}
 			}
 
 			if(!empty($req['action']) && !empty($req['code'])) {
-				$id = unseal($req['code']);
-				$codeValue = $this->meta->get($id);
+				return $this->view('auth/code');
 			}
-
-
-			if(!empty($codeValue)) {
-				if(!$codeValue) {
-					Flash::set("Invalid Code");
-					return request()->return();
-				}
-
-				$this->meta->delete($codeValue->id);
-
-				$isOkay = $this->user->update([
-					'is_verified' => true
-				], $codeValue->parent_id);
-
-				if($isOkay) {
-					Flash::set("Account Verified");
-					$this->user->startAuth($codeValue->parent_id);
-					return redirect(_route('user:show', $codeValue->parent_id));
-				}
-			}
-
-			return $this->view('auth/code');
 		}
 		
 
