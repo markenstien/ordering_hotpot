@@ -87,7 +87,7 @@
 				$link = "<a href ='{$href}'> Link </a>";
 
 				$emailContent = " Good day <strong>{$post['firstname']}</strong>,<br/>";
-				$emailContent .= " You Recieved this email because you used your email to register on ". APP_NAME .'<br/>';
+				$emailContent .= " You Recieved this email because you used your email to register on ". COMPANY_NAME .'<br/>';
 				$emailContent .= " Verify your registration to enjoy Always new and affordable drug, prices make your hearts healthy too. <br/></br>";
 				$emailContent .= " Click this {$link} or use this code to activate your account".$this->meta->retVal['code'];
 
@@ -112,20 +112,20 @@
 
 		public function code() {
 			$req = request()->inputs();
-
 			if(isSubmitted()) {
 				$code = request()->post('verification_code');
 				$codeValue = $this->meta->single([
 					'meta_value' => $code
 				]);
 			}
-			
+
 			if(!empty($req['action']) && !empty($req['code'])) {
 				$id = unseal($req['code']);
 				$codeValue = $this->meta->get($id);
 			}
 
-			if(isset($codeValue)) {
+
+			if(!empty($codeValue)) {
 				if(!$codeValue) {
 					Flash::set("Invalid Code");
 					return request()->return();
@@ -142,6 +142,9 @@
 					$this->user->startAuth($codeValue->parent_id);
 					return redirect(_route('user:show', $codeValue->parent_id));
 				}
+			} else {
+				Flash::set("Code no longer valid", 'danger');
+				return redirect(_route('auth:login'));
 			}
 
 			return $this->view('auth/code');

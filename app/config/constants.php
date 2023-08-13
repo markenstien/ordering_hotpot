@@ -45,7 +45,7 @@
 
     define('DESCRIPTION' , '#############');
 
-    define('AUTHOR' , 'Medicad System');
+    define('AUTHOR' , 'Cadaceous Medical System');
 
 
     define('APP_KEY' , 'Medicad-5175140471');

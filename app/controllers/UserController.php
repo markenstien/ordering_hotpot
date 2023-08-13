@@ -121,7 +121,7 @@
 		}
 
 		public function profile() {
-
+			$this->show(whoIs('id'));
 		}
 
 		public function sendCredential($id)

@@ -245,6 +245,10 @@
 				$errors[] = " Incorrect Password ";
 			}
 
+			if(!$user->is_verified) {
+				$errors[] = " User is not verified ";
+			}
+
 			if(!empty($errors)){
 				$this->addError( implode(',', $errors));
 				return false;

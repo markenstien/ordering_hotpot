@@ -53,7 +53,7 @@
     $system['version']  = 'N/A';
 
 
-    $system['app_name'] = 'COVID-PIMS';
+    $system['app_name'] = 'Cadaceous Medical System';
 
     $ui = [
         'vendor' => 'cork'
