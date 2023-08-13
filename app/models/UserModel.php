@@ -289,11 +289,12 @@
 			return $age->format("%y");
 		}
 
-		public function getPatients()
-		{
-			
+		public function changePassword($password,$userId) {
+			return parent::update([
+				'password' => $password
+			], $userId);
 		}
-
+		
 		public function totalUser(){
 			$staff = [UserService::STAFF, UserService::SUPERVISOR];
 
