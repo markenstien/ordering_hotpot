@@ -5,8 +5,11 @@
 				<div class="card-header">
 					<h4 class="card-title">Forget password</h4>
 					<?php echo wLinkDefault(_route('auth:login'), 'Cancel Forget Password')?>
+
+					<?php Flash::show()?>
 				</div>
 
+				<?php if(!$isSubmitted) :?>
 				<div class="card-body">
 					<?php
 						Form::open([
@@ -30,6 +33,7 @@
 						</div>
 					<?php Form::close()?>
 				</div>
+				<?php endif?>
 			</div>
 		</div>
 	</div>

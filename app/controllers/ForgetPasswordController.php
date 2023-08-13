@@ -9,6 +9,7 @@
 		}
 
 		public function index() {
+			$isSubmitted = false;
 			if(isSubmitted()) {
 				$post = request()->posts();
 
@@ -24,7 +25,10 @@
 				if($user) {
 					$payload = $this->generateResetPassword($user->id, $user->email);
 				}
+
+				$isSubmitted  = true;
 			}
+			$this->data['isSubmitted'] = $isSubmitted;
 			return $this->view('forget_password/index', $this->data);
 		}
 
