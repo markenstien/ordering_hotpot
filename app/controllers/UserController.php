@@ -17,6 +17,7 @@
 
 		public function index()
 		{
+			_requireAuth();
 			$params = request()->inputs();
 
 			if(!empty($params))
@@ -34,6 +35,7 @@
 
 		public function create()
 		{
+			_requireAuth();
 			if(isSubmitted()) {
 				$post = request()->posts();
 				$user_id = $this->model->create($post , 'profile');
@@ -58,6 +60,7 @@
 
 		public function edit($id)
 		{
+			_requireAuth();
 			if(isSubmitted()) {
 				$post = request()->posts();
 
@@ -102,6 +105,7 @@
 
 		public function show($id)
 		{
+			_requireAuth();
 			$user = $this->model->get($id);
 
 			if(!$user) {

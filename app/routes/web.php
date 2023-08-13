@@ -49,7 +49,8 @@
 		'register' => $controller.'/register',
 		'logout' => $controller.'/logout',
 		'forgot-password' => $controller .'/forgotPassword',
-		'code'  => $controller.'/code'
+		'code'  => $controller.'/code',
+		'requestActivationCode' => $controller . '/requestActivationCode'
 	];
 
 	$controller = '/AttachmentController';

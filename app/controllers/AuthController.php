@@ -81,21 +81,8 @@
 					Flash::set($this->user->getErrorString(),'danger');
 					return request()->return();
 				}
-				$this->meta->createVerifyUserCode($this->user->retVal['id']);
-
-				$href = URL.DS.'AuthController/code/?action=activate&code='.seal($this->meta->retVal['id']);
-				$link = "<a href ='{$href}'> Link </a>";
-
-				$emailContent = " Good day <strong>{$post['firstname']}</strong>,<br/>";
-				$emailContent .= " You Recieved this email because you used your email to register on ". COMPANY_NAME .'<br/>';
-				$emailContent .= " Verify your registration to enjoy Always new and affordable drug, prices make your hearts healthy too. <br/></br>";
-				$emailContent .= " Click this {$link} or use this code to activate your account".$this->meta->retVal['code'];
-
-				$emailBody = wEmailComplete($emailContent);
-				_mail($post['email'], 'ACCOUNT VERIFICATION', $emailBody);
-
-				Flash::set("User has been created, verification link and code has been sent to your email '{$post['email']}'");
-				return redirect(_route('auth:code'));
+				
+				return $this->requestActivationCode($isOkay);
 			}
 
 			$form = $this->_form;
@@ -110,6 +97,25 @@
 			return $this->view('auth/register', $this->data);
 		}
 
+		public function requestActivationCode($userId) {
+
+			$user = $this->user->get($userId);
+
+			$this->meta->createVerifyUserCode($userId);
+			$href = URL.DS.'AuthController/code/?action=activate&code='.seal($user->id);
+			$link = "<a href ='{$href}'> Link </a>";
+
+			$emailContent = " Good day <strong>{$user->firstname}</strong>,<br/>";
+			$emailContent .= " You Recieved this email because you used your email to register on ". COMPANY_NAME .'<br/>';
+			$emailContent .= " Verify your registration to enjoy Always new and affordable drug, prices make your hearts healthy too. <br/></br>";
+			$emailContent .= " Click this {$link} or use this code to activate your account".$this->meta->retVal['code'];
+
+			$emailBody = wEmailComplete($emailContent);
+			_mail($user->email, 'ACCOUNT VERIFICATION', $emailBody);
+
+			Flash::set("User has been created, verification link and code has been sent to your email '{$user->email}'");
+			return redirect(_route('auth:code'));
+		}
 		public function code() {
 			$req = request()->inputs();
 			if(isSubmitted()) {
@@ -142,9 +148,6 @@
 					$this->user->startAuth($codeValue->parent_id);
 					return redirect(_route('user:show', $codeValue->parent_id));
 				}
-			} else {
-				Flash::set("Code no longer valid", 'danger');
-				return redirect(_route('auth:login'));
 			}
 
 			return $this->view('auth/code');

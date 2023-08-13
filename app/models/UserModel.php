@@ -246,7 +246,10 @@
 			}
 
 			if(!$user->is_verified) {
-				$errors[] = " User is not verified ";
+				$url = URL.DS._route('auth:requestActivationCode', $user->id);
+				$link = wLinkDefault($url, "Click here to send account activation link");
+				$this->addError("User is not verified, {$link}");
+				return false;
 			}
 
 			if(!empty($errors)){
