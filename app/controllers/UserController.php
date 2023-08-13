@@ -83,6 +83,8 @@
 			$this->data['user_form']->setValueObject($user);
 			$this->data['user_form']->addId($id);
 			$this->data['user_form']->remove('submit');
+			$this->data['user_form']->remove('user_type');
+
 			$this->data['user_form']->add([
 				'name' => 'password',
 				'type' => 'password',
