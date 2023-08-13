@@ -111,7 +111,7 @@
 
 				_mail($emailUsed,"Reset password", $html);
 
-				echo die("Reset password link has been sent to your email, you can close this page now.");
+				Flash::set("Reset password link has been sent to your email, you can close this page now.");
 
 				return $preparePayload;
 			}
