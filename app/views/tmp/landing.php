@@ -54,13 +54,7 @@
                             <a class="nav-link" href="<?php echo _route('home:index')?>">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo _route('home:about')?>">About</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="<?php echo _route('home:shop')?>">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo _route('home:contact')?>">Contact</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo _route('home:track-order')?>">Order Tracking</a>

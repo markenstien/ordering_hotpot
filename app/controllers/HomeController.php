@@ -10,6 +10,24 @@
 			$this->modelOrder = model('OrderModel');
 		}
 		public function index(){
+			if(isSubmitted()) {
+				$post = request()->posts();
+				if(!empty($post['btn_contact'])) {
+					//check if empty
+					$emailContent = "
+						<p>Thank you {$post['name']} for reaching out to us!</p>
+						<p>Expect a response from us within 24hours thanks.</p>
+						<ul> 
+							<li> Subject: {$post['subject']} </li>
+							<li> Message: {$post['message']} </li>
+						</ul>
+					";
+					$emailBody = wEmailComplete($emailContent);
+					_mail($post['email'], 'AN INQUIRY', $emailBody);
+
+					Flash::set("Thanks for reaching out to us, your email is sent.");
+				}
+			}
 			return $this->view('home/index');
 		}
 

@@ -63,24 +63,60 @@
 </div>
 <!-- End Banner Hero -->
 
-<!-- Start Section -->
-<section class="container py-5">
-    <div class="row text-center pt-5 pb-3">
-        <div class="col-lg-6 m-auto">
-            <h1 class="h1">About our Company</h1>
-            <p>
-				The Cadaceous Drug and Medica Supplies opened in 1998. Every
-				day, the pharmacy sells thousands of medications, supplying all the
-				residents in the surrounding districts.
-            </p>
-			<p>
-				One branch is situated in
-				Quezon City, in the NCR region of the Philippines, and the other is
-				situated in Bulacan, in Central Luzon.
-			</p>
+<section class="bg-success py-5">
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col-md-8 text-white">
+                <h1>About Us</h1>
+                <p>
+                The Cadaceous Drug and Medica Supplies opened in 1998. Every day, the pharmacy sells thousands of medications, 
+                supplying all the residents in the surrounding districts. 
+                There are two branches of Cadeceous Drugs and Medical Supplies. 
+                One branch is situated in Quezon City, in the NCR region of the Philippines, and the other is situated in Bulacan,
+                 in Central Luzon. The drugstore's owner earned a bachelor's degree in pharmaceutical sciences and will continue to expand the Drugstore.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <img src="<?php echo _path_upload_get('cadaceous.jpg')?>" alt="About Hero">
+            </div>
         </div>
     </div>
 </section>
+
+<!-- Start Contact -->
+<div class="container">
+    <div class="row py-5">
+		<div class="col-md-6 m-auto text-center">
+			<h1 class="h1">Contact Us</h1>
+		</div>
+        <form class="col-md-9 m-auto" method="post" role="form">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="inputname">Name</label>
+                    <input type="text" class="form-control mt-1" id="name" name="name" placeholder="Name" required>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="inputemail">Email</label>
+                    <input type="email" class="form-control mt-1" id="email" name="email" placeholder="Email" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="inputsubject">Subject</label>
+                <input type="text" class="form-control mt-1" id="subject" name="subject" placeholder="Subject" required>
+            </div>
+            <div class="mb-3">
+                <label for="inputmessage">Message</label>
+                <textarea class="form-control mt-1" id="message" name="message" placeholder="Message" rows="8" required></textarea>
+            </div>
+            <div class="row">
+                <div class="col text-end mt-2">
+                    <button type="submit" name="btn_contact" value="btn_contact" class="btn btn-success btn-lg px-3">Let’s Talk</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- End Section -->
 
 

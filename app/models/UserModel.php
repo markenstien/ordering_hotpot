@@ -41,12 +41,20 @@
 			if(!$validated) {
 				return false;
 			}
+			//validate password
+			if(!empty($user_data['password'])) {
+				if(strlen($user_data['password']) < 4 || strlen($user_data['password']) > 16) {
+					$this->addError("Password must atleast be 4 characters long and maximum of 16 characters");
+					return false;
+				}
+			}
 
 			if(!is_null($id))
 			{
 				//change password also
-				if( empty($fillable_datas['password']) )
+				if(empty($fillable_datas['password'])) {
 					unset($fillable_datas['password']);
+				}
 				$res = parent::update($fillable_datas , $id);
 				$this->uploadProfile('profile' , $id);
 				$user_id = $id;
