@@ -35,8 +35,8 @@
 
     define('COMPANY_NAME_ABBR', 'Cadaceous');
     define('COMPANY_EMAIL', 'info@medicad.store');
-    define('COMPANY_TEL', '0021010101');
-    define('COMPANY_ADDRESS', ' 123 Philippines at ligula 8700');
+    define('COMPANY_TEL', '+639260617765');
+    define('COMPANY_ADDRESS', ' 29-A Seminary Rd, Project 8, Quezon City, 1106 Metro Manila');
 
     
 

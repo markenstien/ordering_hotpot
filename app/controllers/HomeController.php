@@ -47,6 +47,11 @@
 				'where' => [
 					'item.name' => [
 						'condition' => 'like',
+						'value' => "%{$keyword}%",
+						'concatinator' => 'OR'
+					],
+					'brand.name' => [
+						'condition' => 'like',
 						'value' => "%{$keyword}%"
 					]
 				]

@@ -39,7 +39,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+            <a class="navbar-brand text-success logo h1 align-self-center" href="<?php echo _route('home:index')?>">
             <?php echo COMPANY_NAME_ABBR?>
             </a>
 
@@ -143,7 +143,11 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Brands</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">SAMPLE-BRANDS</a></li>
+                        <?php foreach(wBrands() as $key => $row) :?>
+                            <li><a class="text-decoration-none" href="<?php echo _route('home:shop',[
+                                'q' => $row
+                            ])?>"><?php echo $row?></a></li>
+                        <?php endforeach?>
                     </ul>
                 </div>
 

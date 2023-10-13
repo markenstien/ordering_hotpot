@@ -144,7 +144,8 @@
 
 				'attributes' => [
 					'id' => 'email',
-					'placeholder' => 'Enter Valid Email'
+					'placeholder' => 'Enter Valid Email',
+					'maxlength' => 50
 				]
 			]);
 		}
@@ -179,7 +180,8 @@
 				],
 
 				'attributes' => [
-					'id' => 'password'
+					'id' => 'password',
+					'maxlength' => 20
 				]
 			]);
 		}
