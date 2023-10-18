@@ -4,8 +4,11 @@
     <div class="container pb-5">
         <div class="row">
             <div class="col-lg-5 mt-5">
-                <div class="card mb-3">
-                    <img class="card-img img-fluid" src="<?php echo $item->images[0]->full_url ?? ''?>" alt="Card image cap" id="product-detail">
+                <div class="card mb-3 main-image-container">
+                    <div class="img-magnifier-container">
+                        <img class="card-img img-fluid" src="<?php echo $item->images[0]->full_url ?? ''?>" 
+                        alt="Card image cap" id="product-detail">
+                    </div>
                 </div>
                 <div class="row">
                     <!--Start Controls-->
@@ -27,7 +30,9 @@
                                     <?php foreach($item->images as $key => $image) :?>
                                         <div class="col-4">
                                             <a href="#">
-                                                <img class="card-img img-fluid" src="<?php echo $image->full_url?>" alt="Product Image 1">
+                                                <img class="card-img img-fluid img-thumbnail" src="<?php echo $image->full_url?>" 
+                                                alt="Product Image 1" style="width:150px; height:150px"
+                                                id="<?php echo uniqid('thumbnail')?>">
                                             </a>
                                         </div>
                                     <?php endforeach?>
@@ -131,11 +136,10 @@
                             <img class="card-img rounded-0 img-fluid" src="<?php echo $row->images[0]->full_url?>" style="width: 150px;">
                             <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 <ul class="list-unstyled">
-                                    <?php if(whoIs()) :?>
-                                        <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                                    <?php endif?>
-                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
-                                    <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
+                                    <li>
+                                        <a class="btn btn-success text-white mt-2" href="<?php echo _route('home:catalog-view', $row->id)?>">
+                                        <i class="far fa-eye"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -171,10 +175,112 @@
 <!-- End Article -->
 <?php endbuild() ?>
 
+<?php build('styles')?>
+<style>
+    * {box-sizing: border-box;}
+
+    .img-magnifier-container {
+        position:relative;
+    }
+
+    .img-magnifier-container img{
+        height: 500px;
+    }
+
+    .img-magnifier-glass {
+        position: absolute;
+        border: 3px solid #000;
+        cursor: none;
+        /*Set the size of the magnifier glass:*/
+        width: 200px;
+        height: 200px;
+    }
+</style>
+<?php endbuild()?>
 <?php build('scripts')?>
 <!-- Start Slider Script -->
 <script src="<?php echo _path_tmp('main-tmp/assets/js/slick.min.js')?>"></script>
     <script>
+        function magnify(imgID, zoom) {
+            var img, glass, w, h, bw;
+
+            img = document.getElementById(imgID);
+            /*create magnifier glass:*/
+            glass = document.createElement("DIV");
+            glass.setAttribute("class", "img-magnifier-glass");
+            /*insert magnifier glass:*/
+            img.parentElement.insertBefore(glass, img);
+            /*set background properties for the magnifier glass:*/
+            glass.style.backgroundImage = "url('" + img.src + "')";
+            glass.style.backgroundRepeat = "no-repeat";
+            glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+            bw = 3;
+            w = glass.offsetWidth / 2;
+            h = glass.offsetHeight / 2;
+            /*execute a function when someone moves the magnifier glass over the image:*/
+            glass.addEventListener("mousemove", moveMagnifier);
+            img.addEventListener("mousemove", moveMagnifier);
+            /*and also for touch screens:*/
+            glass.addEventListener("touchmove", moveMagnifier);
+            img.addEventListener("touchmove", moveMagnifier);
+
+            function moveMagnifier(e) {
+                var pos, x, y;
+                /*prevent any other actions that may occur when moving over the image*/
+                e.preventDefault();
+                /*get the cursor's x and y positions:*/
+                pos = getCursorPos(e);
+                x = pos.x;
+                y = pos.y;
+                /*prevent the magnifier glass from being positioned outside the image:*/
+                if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
+                if (x < w / zoom) {x = w / zoom;}
+                if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
+                if (y < h / zoom) {y = h / zoom;}
+                /*set the position of the magnifier glass:*/
+                glass.style.left = (x - w) + "px";
+                glass.style.top = (y - h) + "px";
+                /*display what the magnifier glass "sees":*/
+                glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+            }
+
+            function getCursorPos(e) {
+                var a, x = 0, y = 0;
+                e = e || window.event;
+                /*get the x and y positions of the image:*/
+                a = img.getBoundingClientRect();
+                /*calculate the cursor's x and y coordinates, relative to the image:*/
+                x = e.pageX - a.left;
+                y = e.pageY - a.top;
+                /*consider any page scrolling:*/
+                x = x - window.pageXOffset;
+                y = y - window.pageYOffset;
+                return {x : x, y : y};
+            }
+        }
+
+        $('.img-magnifier-container').on('mouseout', function(){
+            $('.img-magnifier-glass').hide();
+        });
+
+        $('.img-magnifier-container').on('mouseover', function(){
+            $('.img-magnifier-glass').hide();
+            $('.img-magnifier-glass').show();
+        });
+
+        $('.img-thumbnail').click(function(){
+            $('#product-detail').attr('src', $(this).attr('src'));
+            if(document.querySelectorAll('.img-magnifier-glass')) {
+                document.querySelectorAll('.img-magnifier-glass').forEach(box => {
+                    box.remove();
+                });
+            }
+            console.log($(this).attr('src'));
+            magnify('product-detail', 2);
+        });
+
+        magnify('product-detail', 2);
+
         $('#carousel-related-product').slick({
             infinite: true,
             arrows: false,

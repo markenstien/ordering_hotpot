@@ -16,6 +16,8 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="<?php echo _path_tmp('landing-tmp/assets/css/fontawesome.min.css')?>">
+    <?php produce('headers')?>
+    <?php produce('styles')?>
 </head>
 
 <body>
