@@ -192,8 +192,8 @@
         border: 3px solid #000;
         cursor: none;
         /*Set the size of the magnifier glass:*/
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 250px;
     }
 </style>
 <?php endbuild()?>
