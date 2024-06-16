@@ -3,7 +3,7 @@
         <div class="card-header">
             <h4 class="card-title">Item Preview</h4>
             <?php Flash::show()?>
-            <?php echo btnEdit(_route('item:edit', $item->id))?>
+            <?php echo wLinkDefault(_route('item:edit', $item->id))?>
         </div>
 
         <div class="card-body">
@@ -31,30 +31,14 @@
                                 </tr>
                                 <tr>
                                     <td>Cost Price : </td>
-                                    <td><?php echo $item->cost_price?></td>
+                                    <td><?php echo amountHTML($item->cost_price)?></td>
                                 </tr>
                                 <tr>
                                     <td>Sell Price : </td>
-                                    <td><?php echo $item->sell_price?></td>
+                                    <td><?php echo amountHTML($item->sell_price)?></td>
                                 </tr>
                                 <tr>
-                                    <td>Minimum Stock : </td>
-                                    <td><?php echo $item->min_stock?></td>
-                                </tr>
-                                <tr>
-                                    <td>Maximum Stock : </td>
-                                    <td><?php echo $item->max_stock?></td>
-                                </tr>
-                                <tr>
-                                    <td>Manufacturer : </td>
-                                    <td><?php echo $item->manufacturer_name?></td>
-                                </tr>
-                                <tr>
-                                    <td>Variant : </td>
-                                    <td><?php echo $item->variant?></td>
-                                </tr>
-                                <tr>
-                                    <td>Remarks : </td>
+                                    <td><?php echo $item_form->label('remarks')?> : </td>
                                     <td><?php echo $item->remarks?></td>
                                 </tr>
                             </table>

@@ -16,7 +16,12 @@
         }
 
         public function index() {
-            $this->data['items'] = $this->model->all(null,'id desc');
+            $items = $this->model->all(null,'id desc');
+            foreach($items as $key => $row) {
+                $row->image = $this->model->getSingleImage($row->id);
+            }
+            $this->data['items'] = $items;
+
             return $this->view('item/index',$this->data);
         }
 
@@ -76,6 +81,7 @@
 
             $itemForm->setValueObject($item);
             $itemForm->addId($id);
+            $this->data['images'] = $this->model->getImages($id);
             $this->data['item'] = $item;
             $this->data['item_form'] = $itemForm;
 

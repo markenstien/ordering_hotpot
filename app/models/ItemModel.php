@@ -27,6 +27,7 @@
         public function createOrUpdate($itemData, $id = null) {
             $retVal = null;
             $_fillables = $this->getFillablesOnly($itemData);
+
             $item = $this->getItemByUniqueKey($itemData['sku'], $itemData['name'], $id);
 
             if (!is_null($id)) {
@@ -55,18 +56,24 @@
             ]);
         }
 
+        public function getSingleImage($id) {
+            return $this->getImages($id)[0] ?? false;
+        }
+
 
         private function getItemByUniqueKey($sku,$name, $id = null) {
             $product = parent::single([
                 'sku' => [
                     'condition' => 'equal',
-                    'value' => $sku,
-                    'concatinator' => 'OR'
+                    'value' => $sku
                 ]
             ]);
-            if($product->id == $id) {
+
+            if(!$product || ($product && $product->id == $id)) {
                 return false;
-            }return true;
+            }
+
+            return true;
         }
 
          /**

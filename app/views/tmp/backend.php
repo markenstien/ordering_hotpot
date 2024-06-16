@@ -143,27 +143,43 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo _route('order:index')?>">
+                                <a class="nav-link" href="#">
                                     <i class="link-icon" data-feather="box"></i>
                                     <span class="menu-title">Orders</span>
                                 </a>
                             </li>
-                            <?php if(isEqual(whoIs('user_type'),'customer')) :?>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="<?php echo _route('home:shop')?>">
-                                      <i class="link-icon" data-feather="box"></i>
-                                      <span class="menu-title">Shop now</span>
-                                  </a>
-                              </li>
-                            <?php endif?>
-                            <?php if(!isEqual(whoIs('user_type'),'customer')) :?>
-                              <li class="nav-item">
-                                  <a class="nav-link" href="<?php echo _route('transaction:purchase')?>">
-                                      <i class="link-icon" data-feather="box"></i>
-                                      <span class="menu-title">Transaction</span>
-                                  </a>
-                              </li>
-                            <?php endif?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo _route('user:index')?>">
+                                    <i class="link-icon" data-feather="box"></i>
+                                    <span class="menu-title">Users</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo _route('item:index')?>">
+                                    <i class="link-icon" data-feather="box"></i>
+                                    <span class="menu-title">Products</span>
+                                </a>
+                            </li>
+
+                            <div style="display: none;">
+                              <?php if(isEqual(whoIs('user_type'),'customer')) :?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo _route('home:shop')?>">
+                                        <i class="link-icon" data-feather="box"></i>
+                                        <span class="menu-title">Shop now</span>
+                                    </a>
+                                </li>
+                              <?php endif?>
+                              <?php if(!isEqual(whoIs('user_type'),'customer')) :?>
+                                <li class="nav-item" style="display: none;">
+                                    <a class="nav-link" href="<?php echo _route('transaction:purchase')?>">
+                                        <i class="link-icon" data-feather="box"></i>
+                                        <span class="menu-title">Transaction</span>
+                                    </a>
+                                </li>
+                              <?php endif?>
+                            </div>
                             
                             <?php if(isEqual($auth->user_type, ['admin','supervisor'])) :?>
                             <li class="nav-item">
@@ -176,16 +192,6 @@
                                     <ul class="submenu-item">
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('payment:index')?>">Payments</a></li>
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('stock:index')?>">Stocks</a></li>
-                                        <li class="nav-item">
-                                          <a class="nav-link" href="<?php echo _route('user:index')?>">
-                                              <span class="menu-title">Users</span>
-                                          </a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link" href="<?php echo _route('item:index')?>">
-                                              <span class="menu-title">Items</span>
-                                          </a>
-                                        </li>
                                         <!-- <li class="nav-item">
                                           <a class="nav-link" href="<?php echo _route('supplier:index')?>">
                                               <span class="menu-title">Suppliers</span>
@@ -196,11 +202,11 @@
                                               <span class="menu-title">Supply Orders</span>
                                           </a>
                                         </li> -->
-                                        <li class="nav-item">
+                                        <!-- <li class="nav-item">
                                           <a class="nav-link" href="<?php echo _route('category:index')?>">
                                               <span class="menu-title">Categories</span>
                                           </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </li>
@@ -208,7 +214,7 @@
 
                             <?php if(isEqual($auth->user_type, ['admin'])) :?>
                             <li class="nav-item">
-                                <a href="/ReportController/create" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="link-icon" data-feather="hash"></i>
                                     <span class="menu-title">Reports</span></a>
                             </li>

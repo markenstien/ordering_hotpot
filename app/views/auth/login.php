@@ -5,7 +5,7 @@
         <div class="card-body">
             <?php Flash::show()?>
             <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
-            <img src="<?php echo _path_upload_get('cadaceous_logo.png');?>" alt="<?php echo COMPANY_NAME?> Logo"
+            <img src="<?php echo _path_upload_get('hotpotlogo.png');?>" alt="<?php echo COMPANY_NAME?> Logo"
               style="width:150px; margin:0px auto; display:block">
             <?php  __( $form->start() ); ?>
               <div class="mb-3">

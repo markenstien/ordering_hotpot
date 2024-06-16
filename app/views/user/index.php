@@ -3,7 +3,7 @@
 	<div class="card">
 		<div class="card-header">
 			<h4 class="card-title">Users</h4>
-			<?php echo btnCreate(_route('user:create'))?>
+			<?php echo wLinkDefault(_route('user:create'), 'Add User')?>
 		</div>
 
 		<div class="card-body">

@@ -29,25 +29,21 @@
 
     define('GLOBALS' , APPROOT.DS.'classes/globals');
 
-    define('SITE_NAME' , 'medicad.store');
+    define('SITE_NAME' , 'hotplate.one');
 
-    define('COMPANY_NAME' , 'Cadaceous Medical');
+    define('COMPANY_NAME' , 'Hotplate');
 
-    define('COMPANY_NAME_ABBR', 'Cadaceous');
-    define('COMPANY_EMAIL', 'info@medicad.store');
-    define('COMPANY_TEL', '+639260617765');
-    define('COMPANY_ADDRESS', ' 29-A Seminary Rd, Project 8, Quezon City, 1106 Metro Manila');
+    define('COMPANY_NAME_ABBR', 'hotplate');
+    define('COMPANY_EMAIL', 'main@hotplate.store');
+    define('COMPANY_TEL', '+');
+    define('COMPANY_ADDRESS', ' ');
 
     
 
-    define('KEY_WORDS' , 'Medicad,Ordering System');
-
+    define('KEY_WORDS' , 'Hotplate,Ordering System');
 
     define('DESCRIPTION' , '#############');
-
-    define('AUTHOR' , 'Cadaceous Medical System');
-
-
-    define('APP_KEY' , 'Medicad-5175140471');
+    define('AUTHOR' , 'Hotplate Ordering System');
+    define('APP_KEY' , 'Hotplate-5175140471');
     
 ?>

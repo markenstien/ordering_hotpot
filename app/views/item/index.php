@@ -2,18 +2,18 @@
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">Items</h4>
-            <?php echo btnCreate(_route('item:create'))?>
+            <?php echo wLinkDefault(_route('item:create'), 'Add Item')?>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered dataTable">
                     <thead>
                         <th>#</th>
+                        <th>Image</th>
                         <th>SKU</th>
                         <th>Name</th>
                         <th>Sell Price</th>
-                        <th>Category</th>
-                        <th>Quantity</th>
+                        <th>Stock</th>
                         <th>Action</th>
                     </thead>
 
@@ -21,10 +21,10 @@
                         <?php foreach($items as $key => $row) :?>
                             <tr>
                                 <td><?php echo ++$key?></td>
+                                <td><?php echo isset($row->image->full_url) ? "<img src='{$row->image->full_url}'/>" : ''?></td>
                                 <td><?php echo $row->sku?></td>
                                 <td><?php echo $row->name?></td>
-                                <td><?php echo $row->sell_price?></td>
-                                <td><?php echo $row->category_id?></td>
+                                <td><?php echo amountHTML($row->sell_price)?></td>
                                 <td><?php echo $row->total_stock?></td>
                                 <td>
                                     <?php 

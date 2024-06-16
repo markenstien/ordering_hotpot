@@ -155,9 +155,10 @@
                 'name' => 'remarks',
                 'type' => 'textarea',
                 'options' => [
-                    'label' => 'Remarks',
+                    'label' => 'Description',
                     'rows' => 3
                 ],
+                'required' => true,
                 'class' => 'form-control'
             ]);
         }

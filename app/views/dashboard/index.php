@@ -9,7 +9,8 @@
 			</div>
 			<div class="row">
 				<div class="col-6 col-md-12 col-xl-5">
-					<h3 class="mb-2"><?php echo amountHTML($orderAmountTotal ?? 0)?></h3>
+					<h3 class="mb-2" style="display: none;"><?php echo amountHTML($orderAmountTotal ?? 0)?></h3>
+					<h3 class="mb-2">0.0</h3>
 					<div class="d-flex align-items-baseline">
 						<p class="text-success">
 						<span>Within 30 days</span>
@@ -29,7 +30,8 @@
 			</div>
 			<div class="row">
 				<div class="col-6 col-md-12 col-xl-5">
-					<h3 class="mb-2"><?php echo $totalItem?></h3>
+					<h3 class="mb-2" style="display: none;"><?php echo $totalItem?></h3>
+					<h3 class="mb-2">0.0</h3>
 					<div class="d-flex align-items-baseline">
 						<p class="text-success">
 						<span>Item Variants</span>
@@ -49,7 +51,8 @@
 			</div>
 			<div class="row">
 				<div class="col-6 col-md-12 col-xl-5">
-					<h3 class="mb-2"><?php echo $totalUser?></h3>
+					<h3 class="mb-2" style="display: none;"><?php echo $totalUser?></h3>
+					<h3 class="mb-2">0.0</h3>
 					<div class="d-flex align-items-baseline">
 						<p class="text-success">
 						<span>Active</span>
