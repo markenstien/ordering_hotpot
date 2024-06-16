@@ -11,12 +11,12 @@
     switch(SYSTEM_MODE)
     {
         case 'local':
-            define('URL' , 'http://dev.medicad');
+            define('URL' , 'http://dev.hotpot');
             define('DBVENDOR' , 'mysql');
             define('DBHOST' , 'localhost');
             define('DBUSER' , 'root');
             define('DBPASS' , '');
-            define('DBNAME' , 'th_medicad');
+            define('DBNAME' , 'th_ordering_hotpot');
 
             define('BASECONTROLLER' , 'AuthController');
             define('BASEMETHOD' , 'index');
