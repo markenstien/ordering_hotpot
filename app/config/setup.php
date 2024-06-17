@@ -59,6 +59,4 @@
         'vendor' => 'cork'
     ];
 
-
-
     date_default_timezone_set($system['time_zone']);
