@@ -42,13 +42,12 @@
             </div>
         </div>
         <!-- Spinner End -->
-
-
         <!-- Navbar & Hero Start -->
-        <?php echo pull_view('tmp/includes/navigation')?>
+        <?php grab('tmp/includes/navigation')?>
         <!-- Navbar & Hero End -->
 
         <?php echo produce('content') ?>
+
         <!-- Service Start -->
         <div class="container-xxl py-5" style="display: none;">
             <div class="container">

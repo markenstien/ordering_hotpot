@@ -1,5 +1,18 @@
 <?php build('content') ?>
-	<div class="container" style="padding: 50px 0px;">
+	<div class="container-xxl py-5 bg-dark hero-header mb-5">
+		<div class="container my-5 py-5">
+			<div class="row align-items-center g-5">
+				<div class="col-lg-6 text-center text-lg-start">
+					<h1 class="display-3 text-white animated slideInLeft">Cart<br>Overview</h1>
+				</div>
+				<div class="col-lg-6 text-center text-lg-end overflow-hidden">
+					<img class="img-fluid" src="img/hero.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-xxl">
 		<div class="card">
 			<div class="card-header">
 				<h4 class="card-title">Cart Items</h4>
@@ -26,10 +39,10 @@
 								<?php $totalAmount += $itemPriceTotal?>
 								<tr>
 									<td><?php echo ++$key?></td>
-									<td><?php echo wLinkDefault(_route('home:catalog-view', $row->item_id), $row->name)?></td>
-									<td><?php echo $row->sold_price?></td>
+									<td> <img src="<?php echo $row->image->full_url ?? ''?>" alt="" style="width: 50px;"> <?php echo wLinkDefault(_route('home:catalog-view', $row->item_id), $row->name)?></td>
+									<td><?php echo amountHTML($row->sold_price, 'PHP')?></td>
 									<td><?php echo $row->quantity?></td>
-									<td><?php echo amountHTML($itemPriceTotal)?></td>
+									<td><?php echo amountHTML($itemPriceTotal, 'PHP')?></td>
 									<td>
 										<?php echo wLinkDefault('#', 'Edit')?> | 
 										<?php echo wLinkDefault(_route('cart:delete', $row->id), 'Delete')?>

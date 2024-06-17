@@ -11,11 +11,17 @@
 			parent::__construct();
 			$this->modelOrderItem = model('OrderItemModel');
 			$this->modelOrder = model('OrderModel');
+			$this->itemModel = model('ItemModel');
 			$this->formPayment = new PaymentForm();
 		}
 
 		public function index() {
 			$items = $this->modelOrderItem->getCurrentSession('cart');
+
+			foreach($items as $key => $row) {
+				$row->image = $this->itemModel->getSingleImage($row->item_id);
+			}
+
 			$this->data['items'] = $items;
 			return $this->view('cart/index', $this->data);
 		}

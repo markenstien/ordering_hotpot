@@ -1,4 +1,18 @@
 <?php build('content') ?>
+	<div class="container-xxl py-5 bg-dark hero-header mb-5">
+		<div class="container my-5 py-5">
+			<div class="row align-items-center g-5">
+				<div class="col-lg-6 text-center text-lg-start">
+					<h1 class="display-3 text-white animated slideInLeft">Checkout</h1>
+				</div>
+				<div class="col-lg-6 text-center text-lg-end overflow-hidden">
+					<img class="img-fluid" src="img/hero.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<div class="container" style="padding: 50px 0px;">
 		<?php
 			Form::open([
@@ -8,7 +22,7 @@
 		?>
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Checkout Page</h4>
+				<h4 class="card-title">Review your order</h4>
 			</div>
 
 			<div class="card-body">
@@ -82,7 +96,7 @@
 				</div>
 			</div>
 
-			<img src="<?php echo _path_upload_get('cadaceous_logo.png');?>" alt="<?php echo COMPANY_NAME?> Logo"
+			<img src="<?php echo _path_upload_get('hotpotlogo.png');?>" alt="<?php echo COMPANY_NAME?> Logo"
               style="width:150px; margin:0px auto; display:block">
 		</div>
 		<?php Form::close()?>

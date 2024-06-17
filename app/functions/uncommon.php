@@ -209,15 +209,15 @@
     }
 
 
-    function amountHTML($amount)
+    function amountHTML($amount, $prefix = '')
 	{
 		$amountHTML = number_format($amount , 2);
 
 		if($amount < 0) {
             $amountHTML = number_format(abs($amount), 2);
-			return "<span>( {$amountHTML} )</span>";
+			return "<span>{$prefix} ( {$amountHTML} )</span>";
 		}else{
-			return "<span> {$amountHTML}</span>";
+			return "<span>{$prefix} {$amountHTML}</span>";
 		}
     }
 

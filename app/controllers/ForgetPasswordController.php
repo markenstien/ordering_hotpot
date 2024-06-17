@@ -113,7 +113,7 @@
 				$html .= "<div> Please click the link below to continue, if this is not your please ignore the change password request";
 				$html .= "<div>{$link}</div>";
 
-				_mail($emailUsed,"Reset password", $html);
+				// _mail($emailUsed,"Reset password", $html);
 
 				Flash::set("Reset password link has been sent to your email, you can close this page now.");
 

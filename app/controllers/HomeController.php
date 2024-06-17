@@ -28,7 +28,18 @@
 					Flash::set("Thanks for reaching out to us, your email is sent.");
 				}
 			}
-			return $this->view('home/index');
+			$products = $this->modelItem->getAll([
+				'limit' => 4
+			]);
+
+			foreach($products as $key => $product) {
+				$product->image = $this->modelItem->getSingleImage($product->id);
+			}
+			$data = [
+				'products' => $products
+			];
+
+			return $this->view('home/index', $data);
 		}
 
 		public function about() {

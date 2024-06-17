@@ -1,170 +1,44 @@
 <?php build('content') ?>
-<!-- Start Content -->
-<div class="container py-5">
 
-    <?php if(!empty($_GET['q'])) :?>
-        <?php echo wLinkDefault('?', 'Remove Filter : ' . $_GET['q'])?>
-        <div>Total Result : <?php echo count($items)?></div>
-    <?php endif?>
-    <div class="row">
-        <div class="col-lg-9 mx-auto">
-            <?php if(!empty($items)) :?>
-                <div class="row">
-                    <?php foreach($items as $key => $row) :?>
-                        <div class="col-md-4">
-                            <div class="card mb-4 product-wap rounded-0">
-                                <div class="card rounded-0">
-                                    <img class="card-img rounded-0 img-fluid" src="<?php echo $row->images[0]->full_url ?? ''?>">
-                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                        <ul class="list-unstyled">
-                                            <?php if(whoIs()) :?>
-                                                <li>
-                                                    <a class="btn btn-success text-white" href="#">
-                                                        <i class="far fa-heart"></i></a>
-                                                </li>
-                                            <?php endif?>
-                                            <li><a class="btn btn-success text-white mt-2" href="<?php echo _route('home:catalog-view', $row->id)?>"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <a href="<?php echo _route('home:catalog-view', $row->id)?>" class="h3 text-decoration-none"><?php echo $row->name?></a>
-                                    <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                        <li><?php echo $row->brand_name?></li>
-                                        <li class="pt-2">
-                                            <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                                            <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                                            <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                                            <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                                            <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                                        </li>
-                                    </ul>
-                                    <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                        <li>
-                                            <i class="text-warning fa fa-star"></i>
-                                            <i class="text-warning fa fa-star"></i>
-                                            <i class="text-warning fa fa-star"></i>
-                                            <i class="text-muted fa fa-star"></i>
-                                            <i class="text-muted fa fa-star"></i>
-                                        </li>
-                                    </ul>
-                                    <p class="text-center mb-0">PHP <?php echo amountHTML($row->sell_price)?></p>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach?>
-                </div>
-            <?php else:?>
-                <p class="text-center">No Items found.</p>
-            <?php endif?>
-        </div>
-
+<div class="container-xxl py-5 bg-dark hero-header mb-5">
+    <div class="container text-center my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Food Menu</h1>
     </div>
 </div>
-<!-- End Content -->
 
-<!-- Start Brands -->
-<section class="bg-light py-5">
-    <div class="container my-4">
-        <div class="row text-center py-3">
-            <div class="col-lg-6 m-auto">
-                <h1 class="h1">Our Brands</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    Lorem ipsum dolor sit amet.
-                </p>
-            </div>
-            <div class="col-lg-9 m-auto tempaltemo-carousel">
-                <div class="row d-flex flex-row">
-                    <!--Controls-->
-                    <div class="col-1 align-self-center">
-                        <a class="h1" href="#multi-item-example" role="button" data-bs-slide="prev">
-                            <i class="text-light fas fa-chevron-left"></i>
-                        </a>
-                    </div>
-                    <!--End Controls-->
+<?php if(!empty($_GET['q'])) :?>
+<!-- Start Content -->
+<div class="container py-5">
+    <?php echo wLinkDefault('?', 'Remove Filter : ' . $_GET['q'])?>
+    <div>Total Result : <?php echo count($items)?></div>
+</div>
+<?php endif?>
 
-                    <!--Carousel Wrapper-->
-                    <div class="col">
-                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="multi-item-example" data-bs-ride="carousel">
-                            <!--Slides-->
-                            <div class="carousel-inner product-links-wap" role="listbox">
-
-                                <!--First slide-->
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_01.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_02.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_03.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_04.png" alt="Brand Logo"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--End First slide-->
-
-                                <!--Second slide-->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_01.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_02.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_03.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_04.png" alt="Brand Logo"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--End Second slide-->
-
-                                <!--Third slide-->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_01.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_02.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_03.png" alt="Brand Logo"></a>
-                                        </div>
-                                        <div class="col-3 p-md-5">
-                                            <a href="#"><img class="img-fluid brand-img" src="assets/img/brand_04.png" alt="Brand Logo"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--End Third slide-->
-
+<?php Flash::show() ?>
+<?php if(!empty($items)) :?>
+    <div class="container py-5">
+        <div class="row">
+            <?php foreach($items as $key => $row) :?>
+                <div class="col-lg-6 mb-5" onclick="window.location = '<?php echo _route('home:catalog-view', $row->id)?>'" style="cursor:pointer">
+                    <div class="d-flex align-items-center">
+                        <div class="w-100 d-flex flex-column text-start ps-4">
+                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                <span><?php echo $row->name?></span>
+                                <span class="text-primary"><?php echo amountHTML($row->sell_price, 'PHP')?></span>
+                            </h5>
+                            <div class="mb-2">
+                                <img class="flex-shrink-0 img-fluid rounded" src="<?php echo $row->images[0]->full_url ?? ''?>" 
+                                alt="" style="width: 150px;">
                             </div>
-                            <!--End Slides-->
+                            <small class="fst-italic"><?php echo $row->remarks?></small>
                         </div>
                     </div>
-                    <!--End Carousel Wrapper-->
-
-                    <!--Controls-->
-                    <div class="col-1 align-self-center">
-                        <a class="h1" href="#multi-item-example" role="button" data-bs-slide="next">
-                            <i class="text-light fas fa-chevron-right"></i>
-                        </a>
-                    </div>
-                    <!--End Controls-->
                 </div>
-            </div>
+            <?php endforeach?>
         </div>
     </div>
-</section>
-<!--End Brands-->
+    <?php else:?>
+        <p class="text-center">No Items found.</p>
+<?php endif?>
 <?php endbuild()?>
 <?php loadTo('tmp/landing')?>

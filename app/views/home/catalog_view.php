@@ -1,4 +1,18 @@
 <?php build('content') ?>
+<div class="container-xxl">
+    <div class="container-xxl py-5 bg-dark hero-header mb-5">
+        <div class="container my-5 py-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <h1 class="display-3 text-white animated slideInLeft">Meal<br>Overview</h1>
+                </div>
+                <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                    <img class="img-fluid" src="img/hero.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Open Content -->
 <section class="bg-light">
     <div class="container pb-5">
@@ -10,7 +24,7 @@
                         alt="Card image cap" id="product-detail">
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="display: none;">
                     <!--Start Controls-->
                     <div class="col-1 align-self-center">
                         <a href="#multi-item-example" role="button" data-bs-slide="prev">
@@ -61,31 +75,9 @@
                         <h1 class="h2"><?php echo $item->name?></h1>
                         <label for="#">(#<?php echo $item->sku?>)</label>
                         <p class="h3 py-2">PHP <?php echo amountHTML($item->sell_price)?></p>
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <h6>Brand:</h6>
-                            </li>
-                            <li class="list-inline-item">
-                                <p class="text-muted"><strong><?php echo $item->brand_name?></strong></p>
-                            </li>
-                        </ul>
-
-                        <h6>Description:</h6>
+                        <h6>Remarks</h6>
                         <p><?php echo $item->remarks?></p>
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <h6>Manufacturer:</h6>
-                            </li>
-                            <li class="list-inline-item">
-                                <p class="text-muted"><strong><?php echo $item->manufacturer_name?></strong></p>
-                            </li>
-                        </ul>
 
-                        <h6>Specification:</h6>
-                        <ul class="list-unstyled pb-3">
-                            <li>Packing : <?php echo $item->packing?>'s</li>
-                            <li>Quantity Per Case : <?php echo $item->qty_per_case?> </li>
-                        </ul>
                         <?php
                             Form::open([
                                 'method' => 'post',
@@ -129,46 +121,25 @@
         </div>
         <!--Start Carousel Wrapper-->
         <div id="carousel-related-product">
+            <div class="row">
             <?php foreach($relatedProducts as $key => $row) :?>
-                <div class="p-2 pb-3">
-                    <div class="product-wap card rounded-0">
-                        <div class="card rounded-0">
-                            <img class="card-img rounded-0 img-fluid" src="<?php echo $row->images[0]->full_url?>" style="width: 150px;">
-                            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a class="btn btn-success text-white mt-2" href="<?php echo _route('home:catalog-view', $row->id)?>">
-                                        <i class="far fa-eye"></i></a>
-                                    </li>
-                                </ul>
+                <div class="col-lg-6 mb-5" onclick="window.location = '<?php echo _route('home:catalog-view', $row->id)?>'" style="cursor:pointer">
+                    <div class="d-flex align-items-center">
+                        <div class="w-100 d-flex flex-column text-start ps-4">
+                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                <span><?php echo $row->name?></span>
+                                <span class="text-primary"><?php echo amountHTML($row->sell_price, 'PHP')?></span>
+                            </h5>
+                            <div class="mb-2">
+                                <img class="flex-shrink-0 img-fluid rounded" src="<?php echo $row->images[0]->full_url ?? ''?>" 
+                                alt="" style="width: 150px;">
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <a href="shop-single.html" class="h3 text-decoration-none"><?php echo $row->name?></a>
-                            <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-                                <li><?php echo wPacking($row->packing)?></li>
-                                <li class="pt-2">
-                                    <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
-                                    <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
-                                </li>
-                            </ul>
-                            <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <p class="text-center mb-0">$20.00</p>
+                            <small class="fst-italic"><?php echo $row->remarks?></small>
                         </div>
                     </div>
                 </div>
             <?php endforeach?>
+            </div>
         </div>
     </div>
 </section>

@@ -143,7 +143,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="<?php echo _route('order:index') ?>">
                                     <i class="link-icon" data-feather="box"></i>
                                     <span class="menu-title">Orders</span>
                                 </a>

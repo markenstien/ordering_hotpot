@@ -49,9 +49,7 @@
             extract($globalData);
         }
 
-
         $viewPath = convertDotToDS($viewPath);
-
         return require_once VIEWS.DS.$viewPath.'.php';
     }
 
@@ -65,9 +63,7 @@
             extract($globalData);
         }
 
-
         $viewPath = convertDotToDS($viewPath);
-
         require_once VIEWS.DS.$viewPath.'.php';
     }
 
