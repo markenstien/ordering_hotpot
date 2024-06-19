@@ -175,3 +175,10 @@
             <div style="margin-top:{$height}px"> </div>
         EOF;
     }
+
+    function wSpanBuilder($text, $badge_type = 'primary')
+    {
+        $retVal = '';
+        $retVal = "<span> {$text} </span>";
+        return $retVal;
+    }

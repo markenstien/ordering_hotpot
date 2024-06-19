@@ -77,9 +77,11 @@
 
 	function _notify_email( $message , $emails , $attributes = [] )
 	{
-		$content = pull_view('tmp/emails/email_text_only_tmp' , [
-			'text' => $message,
-		]);
+		// $content = pull_view('tmp/emails/email_text_only_tmp' , [
+		// 	'text' => $message,
+		// ]);
+
+		$content = wEmailComplete($message);
 		
 		if( empty($emails) )
 			return false;
@@ -100,9 +102,9 @@
 	{
 		_notify($message , $recipientIds , $attributes);
 
-		$content = pull_view('tmp/emails/email_text_only_tmp' , [
-			'text' => $message,
-		]);
+		// $content = pull_view('tmp/emails/email_text_only_tmp' , [
+		// 	'text' => $message,
+		// ]);
 
 		_notify_email($message , $emails);
 	}

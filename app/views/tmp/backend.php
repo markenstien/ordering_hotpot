@@ -149,6 +149,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="<?php echo _route('appointment:index') ?>">
+                                    <i class="link-icon" data-feather="box"></i>
+                                    <span class="menu-title">Reservations</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="<?php echo _route('user:index')?>">
                                     <i class="link-icon" data-feather="box"></i>
                                     <span class="menu-title">Users</span>
@@ -168,14 +174,6 @@
                                     <a class="nav-link" href="<?php echo _route('home:shop')?>">
                                         <i class="link-icon" data-feather="box"></i>
                                         <span class="menu-title">Shop now</span>
-                                    </a>
-                                </li>
-                              <?php endif?>
-                              <?php if(!isEqual(whoIs('user_type'),'customer')) :?>
-                                <li class="nav-item" style="display: none;">
-                                    <a class="nav-link" href="<?php echo _route('transaction:purchase')?>">
-                                        <i class="link-icon" data-feather="box"></i>
-                                        <span class="menu-title">Transaction</span>
                                     </a>
                                 </li>
                               <?php endif?>

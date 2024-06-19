@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+	use Form\AppointmentForm;
+	load(['AppointmentForm'], APPROOT.DS.'form');
 
 	class HomeController extends Controller
 	{
@@ -74,12 +77,9 @@
 			return $this->view('home/shop', $this->data);
 		}
 
-		public function cart() {
-
-		}
-
-		public function checkout() {
-
+		public function reservation() {
+			$this->data['appointmentForm'] = new AppointmentForm();
+			return $this->view('home/reservation', $this->data);
 		}
 
 		public function showCatalog($id) {

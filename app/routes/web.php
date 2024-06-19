@@ -235,13 +235,24 @@
 		'about' => 'about',
 		'contact' => 'contact',
 		'catalog-view' => 'showCatalog',
-		'track-order' => 'trackOrder'
+		'track-order' => 'trackOrder',
+		'reservation' => 'reservation'
 	]);
 
 	_routeInstance('cart', 'CartController', $routes, [
 		'add' => 'addToCart',
 		'checkout' => 'checkout'
 	]);
+
+	_routeInstance('appointment', 'AppointmentController', $routes, [
+		'createWithBill' => 'createWithBill',
+		'appointment_form' => 'appointment_form',
+		'payment-add' => 'addPayment',
+		'add' => 'add',
+		'cancel' => 'cancel',
+		'approve' => 'approve',
+	]);
+
 
 	return $routes;
 ?>

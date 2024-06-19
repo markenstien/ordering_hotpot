@@ -12,6 +12,8 @@
 		protected static $MESSAGE_UPDATE_SUCCESS = "UPDATED SUCCESFULLY";
 		protected static $MESSAGE_CREATE_SUCCESS = "CREATED SUCCESFULLY";
 		protected static $MESSAGE_DELETE_SUCCESS = "DELETED SUCCESFULLY";
+
+		protected $_retVal = [];
 		
 		
 		public function getFillablesOnly($datas)
@@ -405,9 +407,13 @@
 
 		return $WHERE;
 	}
-		
 
+	public function _addRetval($name, $value) {
+		$this->_retVal[$name] = $value;
+	}
 
-
+	public function _getRetval($name) {
+		return $this->_retVal[$name];
+	}
 
  }
