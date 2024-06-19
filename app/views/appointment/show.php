@@ -4,7 +4,7 @@
 		<div class="col-md-7">
 			<div class="card">
 				<div class="card-header">
-					<h4 class="card-title">Appointment</h4>
+					<h4 class="card-title">Reservation Preview</h4>
 					<label><?php echo $appointment->type?></label>
 				</div>
 
