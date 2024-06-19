@@ -18,7 +18,7 @@
                 </div>
 
                 <?php echo wDivider(80)?>
-                <img src="<?php echo _path_upload_get('hotplate.png');?>" alt="<?php echo COMPANY_NAME?> Logo"
+                <img src="<?php echo _path_upload_get('hotpot.png');?>" alt="<?php echo COMPANY_NAME?> Logo"
                 style="width:150px; margin:0px auto; display:block">
             </div>
         </div>
