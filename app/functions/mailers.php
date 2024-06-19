@@ -75,6 +75,18 @@
 	{
 		$mailer = MailMaker::getInstance();
 
+		if(SYSTEM_MODE == 'local' || SYSTEM_MODE == 'dev') {
+			print_r([
+				'email_data' => [
+					'reciever' => $receiver,
+					'subject' => $subject
+				]
+			]);
+
+			echo '<div style="margin-top:50px"> </div>';
+			echo $body;
+			die();
+		}
 		$mailer->setSubject($subject)
 		->setBody($body);
 
@@ -90,9 +102,7 @@
 				$mailer->addCC($emailBcc);
 			}
 		}
-
 		/*ADD CC*/
-
 		if(isset($bccAndCcc['cc']))
 		{
 			$emailCC = $bccAndCc['cc'];
@@ -104,7 +114,6 @@
 			}else{
 				$mailer->addBCC($emailCC);
 			}
-
 		}
 
 		if(is_array($receiver))

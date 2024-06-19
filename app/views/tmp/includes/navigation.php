@@ -8,9 +8,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0 pe-4">
-                <a href="<?php echo _route('home:index')?>" class="nav-item nav-link active">Home</a>
-                <a href="<?php echo _route('home:shop')?>" class="nav-item nav-link">Menu</a>
+               <a href="<?php echo _route('home:index')?>" class="nav-item nav-link active">Home</a>
+               <a href="<?php echo _route('home:shop')?>" class="nav-item nav-link">Menu</a>
                <a href="<?php echo _route('auth:login')?>" class="nav-item nav-link">Login</a>
+               <a href="<?php echo _route('cart:index')?>" class="nav-item nav-link">Cart</a>
                 <!-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu m-0">

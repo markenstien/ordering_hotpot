@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Restoran - Bootstrap Restaurant Template</title>
+    <title><?php echo $page_title ?? COMPANY_NAME?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -31,6 +31,8 @@
 
     <!-- Template Stylesheet -->
     <link href="<?php echo _path_tmp('landing-resto/css/style.css')?>" rel="stylesheet">
+    <?php produce('headers')?>
+    <?php produce('styles')?>
 </head>
 
 <body>
@@ -780,6 +782,8 @@
 
     <!-- Template Javascript -->
     <script src="<?php echo _path_tmp('landing-resto/js/main.js')?>"></script>
+
+    <?php produce('scripts') ?>
 </body>
 
 </html>

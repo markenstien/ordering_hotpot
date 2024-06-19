@@ -88,7 +88,7 @@
 				Flash::set("Item not found", 'danger');
 				return redirect(_route('home:shop'));
 			}
-
+			
 			$this->data['relatedProducts'] = $this->modelItem->getAll();
 			return $this->view('home/catalog_view', $this->data);
 		}

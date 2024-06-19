@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Covid PIMS">
+    <meta name="description" content="Covid PIMS">
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
@@ -184,7 +184,7 @@
                             <?php if(isEqual($auth->user_type, ['admin','supervisor'])) :?>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="link-icon" data-feather="mail"></i>
+                                    <i class="link-icon" data-feather="settings"></i>
                                     <span class="menu-title">Others</span>
                                     <i class="link-arrow"></i>
                                 </a>
@@ -192,21 +192,6 @@
                                     <ul class="submenu-item">
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('payment:index')?>">Payments</a></li>
                                         <li class="nav-item"><a class="nav-link" href="<?php echo _route('stock:index')?>">Stocks</a></li>
-                                        <!-- <li class="nav-item">
-                                          <a class="nav-link" href="<?php echo _route('supplier:index')?>">
-                                              <span class="menu-title">Suppliers</span>
-                                          </a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link" href="<?php echo _route('supply-order:index')?>">
-                                              <span class="menu-title">Supply Orders</span>
-                                          </a>
-                                        </li> -->
-                                        <!-- <li class="nav-item">
-                                          <a class="nav-link" href="<?php echo _route('category:index')?>">
-                                              <span class="menu-title">Categories</span>
-                                          </a>
-                                        </li> -->
                                     </ul>
                                 </div>
                             </li>

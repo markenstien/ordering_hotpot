@@ -171,116 +171,38 @@
 <?php build('scripts')?>
 <!-- Start Slider Script -->
 <script src="<?php echo _path_tmp('main-tmp/assets/js/slick.min.js')?>"></script>
-    <script>
-        function magnify(imgID, zoom) {
-            var img, glass, w, h, bw;
+<script>
+    $(document).ready(function() {
+        var btnMinus = $('#btn-minus')
+        var btnPlus  = $('#btn-plus')
+        var varValue = $('#var-value')
+        var hiddenQuantity = $('#product-quanity')
 
-            img = document.getElementById(imgID);
-            /*create magnifier glass:*/
-            glass = document.createElement("DIV");
-            glass.setAttribute("class", "img-magnifier-glass");
-            /*insert magnifier glass:*/
-            img.parentElement.insertBefore(glass, img);
-            /*set background properties for the magnifier glass:*/
-            glass.style.backgroundImage = "url('" + img.src + "')";
-            glass.style.backgroundRepeat = "no-repeat";
-            glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
-            bw = 3;
-            w = glass.offsetWidth / 2;
-            h = glass.offsetHeight / 2;
-            /*execute a function when someone moves the magnifier glass over the image:*/
-            glass.addEventListener("mousemove", moveMagnifier);
-            img.addEventListener("mousemove", moveMagnifier);
-            /*and also for touch screens:*/
-            glass.addEventListener("touchmove", moveMagnifier);
-            img.addEventListener("touchmove", moveMagnifier);
+        var currentItemTotal = getCurrentItemQuantity()
 
-            function moveMagnifier(e) {
-                var pos, x, y;
-                /*prevent any other actions that may occur when moving over the image*/
-                e.preventDefault();
-                /*get the cursor's x and y positions:*/
-                pos = getCursorPos(e);
-                x = pos.x;
-                y = pos.y;
-                /*prevent the magnifier glass from being positioned outside the image:*/
-                if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
-                if (x < w / zoom) {x = w / zoom;}
-                if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
-                if (y < h / zoom) {y = h / zoom;}
-                /*set the position of the magnifier glass:*/
-                glass.style.left = (x - w) + "px";
-                glass.style.top = (y - h) + "px";
-                /*display what the magnifier glass "sees":*/
-                glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+        btnMinus.click(function(){
+            let value = getCurrentItemQuantity()
+            if(value > 1) {
+              varValue.html(--value)
             }
+            updateQuantity(value)
+        })
 
-            function getCursorPos(e) {
-                var a, x = 0, y = 0;
-                e = e || window.event;
-                /*get the x and y positions of the image:*/
-                a = img.getBoundingClientRect();
-                /*calculate the cursor's x and y coordinates, relative to the image:*/
-                x = e.pageX - a.left;
-                y = e.pageY - a.top;
-                /*consider any page scrolling:*/
-                x = x - window.pageXOffset;
-                y = y - window.pageYOffset;
-                return {x : x, y : y};
-            }
+        btnPlus.click(function(){
+            let value = getCurrentItemQuantity()
+            varValue.html(++value)
+            updateQuantity(value)
+        })
+
+        function getCurrentItemQuantity() {
+            let value = varValue.html()
+            return parseInt(value)
         }
 
-        $('.img-magnifier-container').on('mouseout', function(){
-            $('.img-magnifier-glass').hide();
-        });
-
-        $('.img-magnifier-container').on('mouseover', function(){
-            $('.img-magnifier-glass').hide();
-            $('.img-magnifier-glass').show();
-        });
-
-        $('.img-thumbnail').click(function(){
-            $('#product-detail').attr('src', $(this).attr('src'));
-            if(document.querySelectorAll('.img-magnifier-glass')) {
-                document.querySelectorAll('.img-magnifier-glass').forEach(box => {
-                    box.remove();
-                });
-            }
-            console.log($(this).attr('src'));
-            magnify('product-detail', 2);
-        });
-
-        magnify('product-detail', 2);
-
-        $('#carousel-related-product').slick({
-            infinite: true,
-            arrows: false,
-            slidesToShow: 4,
-            slidesToScroll: 3,
-            dots: true,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 3
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 3
-                    }
-                }
-            ]
-        });
-    </script>
+        function updateQuantity(quantity) {
+            hiddenQuantity.val(quantity)
+        }
+    })
+</script>
 <?php endbuild()?>
 <?php loadTo('tmp/landing')?>
