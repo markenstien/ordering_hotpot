@@ -32,6 +32,9 @@
 
             $this->paymentForm->setValue('amount', $order['order']->net_amount);
 
+            if(isEqual(whoIs('user_type'), 'customer')) {
+                $this->paymentForm->setValue('payer_name', whoIs(['firstname', 'lastname']));
+            }
             $this->paymentForm->init([
                 'method' => 'post',
                 'url' => _route('payment:create')

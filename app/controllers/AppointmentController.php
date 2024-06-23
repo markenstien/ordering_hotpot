@@ -72,7 +72,7 @@
 			*/
 			$auth = whoIs();
 
-			if(isEqual($auth->user_type , 'patient')){
+			if(isEqual($auth->user_type , 'customer')){
 				$appointments = $this->model->all([
 					'user_id' => $auth->id
 				], "FIELD(status, 'scheduled', 'pending', 'arrived', 'cancelled') asc, date desc");

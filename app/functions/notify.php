@@ -112,12 +112,10 @@
 	function _notify_pull_items( $user_id )
 	{
 		$user_model = model('UserModel');
-
 		$user = $user_model->get($user_id);
-
 		$db = Database::getInstance();
 
-		if( isEqual($user->user_type , ['patient' , 'doctor' , 'medical personel']) ){
+		if( isEqual($user->user_type , ['customer']) ){
 
 			$db->query(
 				"SELECT * FROM system_notification_recipients as syr

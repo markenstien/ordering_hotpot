@@ -30,19 +30,48 @@
 									style="width: 150px; display:block; margin-bottom:20px">
 							<?php endif?>
 							<h5><?php echo $row->name?></h5>
-							<p><?php echo $row->remarks?></p>
+							<p><?php echo crop_string($row->remarks, 50)?></p>
 						</div>
 					</div>
 				</div>
 			<?php endforeach?>
 
 			<div class="text-center">
-				<a href="#" class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Order now</a>
+				<a href="<?php echo _route('home:shop')?>" class="btn btn-success btn-sm"><i class="fas fa-check-circle"></i> Order now</a>
 			</div>
 		</div>
 	</div>
 </div>
 <!-- Products End -->
+
+<!-- Team Start -->
+<div class="container-xxl pt-5 pb-3">
+		<div class="container">
+			<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+				<h5 class="section-title ff-secondary text-center text-primary fw-normal">Team Members</h5>
+				<h1 class="mb-5">Our Staffs</h1>
+			</div>
+			<div class="row g-4">
+				<?php foreach($staffs as $key => $row) :?>
+					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+						<div class="team-item text-center rounded overflow-hidden">
+							<div class="rounded-circle overflow-hidden m-4">
+								<img class="img-fluid" src="<?php echo $row->profile?>" alt="">
+							</div>
+							<h5 class="mb-0"><?php echo $row->firstname . ' ' .$row->lastname?></h5>
+							<small>Staffs</small>
+							<div class="d-flex justify-content-center mt-3">
+								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
+								<a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+							</div>
+						</div>
+					</div>
+				<?php endforeach?>
+			</div>
+		</div>
+	</div>
+	<!-- Team End -->
 
 <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel" style="display: none;">
 	<ol class="carousel-indicators">

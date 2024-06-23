@@ -2,7 +2,7 @@
 <?php build('content')?>
 	<div class="card">
 		<div class="card-header">
-			<?php echo wLinkDefault(_route('home:index').'#appointment', 'Make Appointment')?>
+			<?php echo wLinkDefault(_route('home:reservation'), 'Make Appointment')?>
 		</div>
 		<div class="card-body">
 			<?php Flash::show()?>

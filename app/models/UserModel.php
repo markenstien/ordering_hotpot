@@ -243,10 +243,11 @@
 		{
 			$errors = [];
 
-			$user = parent::single(['email' => $email]);
+			$user = parent::get(['email' => $email]);
 
 			if(!$user) {
 				$errors[] = " Email '{$email}' does not exists in any account";
+				return false;
 			}
 
 			if(!isEqual($user->password ?? '' , $password)){

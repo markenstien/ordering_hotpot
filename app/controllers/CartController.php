@@ -37,10 +37,10 @@
 					'session_name' => 'cart',
 					'staff_id' => null,
 					'customer_id' => whoIs('id')
-				]);
+				], $post['cart_id'] == 0 ? null : $post['cart_id']);
 
 				if($res) {
-					Flash::set("Item added to cart");
+					Flash::set($this->modelOrderItem->getMessageString());
 					return redirect(_route('cart:index'));
 				} else {
 					Flash::set($this->modelOrderItem->getErrorString(), 'danger');
@@ -74,11 +74,39 @@
                     'id' => $session,
 					'customer_id' => whoIs('id')
                 ];
-                
 
-                $result = $this->modelOrder->placeAndPay($orderData, null);
-                
-                if($result) {
+				$order = $this->modelOrder->get($session);
+                $orderResponse = $this->modelOrder->placeAndPay($orderData, null);
+                if($orderResponse) {
+					$itemsList = "";
+					foreach($items as $key => $row) {
+						$itemsList .= "<li> {$row->name} | {$row->price} | {$row->quantity} | {$row->sold_price}</li>";
+					}
+
+					if(isEqual(whoIs('user_type'), 'customer')) {
+						$emailBody = <<<EOF
+							<h1> Thank you for your ordering</h1>
+							<p> Here is your order details </p>
+							<ul> 
+								<li> Order Reference : #{$order->reference} </li>
+								<li> Total : {$orderData['net_amount']} </li>
+								<li> Contact : {$orderData['customer_name']} {$orderData['mobile_number']} </li>
+							</ul>
+							<p> Particulars </p>
+
+							<ol> 
+								{$itemsList}
+							</ol>
+						EOF;
+
+						$emailBody = wEmailComplete($emailBody);
+						$emailPlaceHolder = [
+							whoIs('email'),
+							"Order #{$order->reference}",
+							$emailBody
+						];
+						_mail(... $emailPlaceHolder);
+					}
                     OrderService::endPurchaseSession('cart');
                     OrderService::startPurchaseSession('cart');//reset order
 

@@ -13,6 +13,7 @@
             $this->model = model('ItemModel');
             $this->stockModel = model('StockModel');
             $this->data['item_form'] = new ItemForm();
+            _authRequired(['admin', 'staff']);
         }
 
         public function index() {

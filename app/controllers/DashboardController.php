@@ -12,6 +12,9 @@
 
 		public function index()
 		{
+			if(isEqual(whoIs('user_type'), 'customer')) {
+				return redirect(_route('order:index'));
+			}
 			$this->data['page_title'] = 'Dashboard';
 			$this->data['totalItem'] = $this->itemModel->totalItem();
 			$this->data['totalUser'] = $this->user_model->totalUser();

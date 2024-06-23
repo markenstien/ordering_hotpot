@@ -114,6 +114,7 @@
 		'delete' => $controller.'/destroy',
 		'show'   => $controller.'/show',
 		'void'   => $controller.'/voidOrder',
+		'complete' => $controller .'/complete'
 	];
 
 	$controller = '/PaymentController';
@@ -123,7 +124,8 @@
 		'create' => $controller.'/create',
 		'delete' => $controller.'/destroy',
 		'show'   => $controller.'/show',
-		'approve' => $controller .'/approve'
+		'approve' => $controller .'/approve',
+		'invalidate'   => $controller . '/invalidate'
 	];
 
 	$controller = '/SupplyOrderController';
@@ -236,7 +238,9 @@
 		'contact' => 'contact',
 		'catalog-view' => 'showCatalog',
 		'track-order' => 'trackOrder',
-		'reservation' => 'reservation'
+		'reservation' => 'reservation',
+		'terms'       => 'terms',
+		'terms-agree'       => 'termsAgree',
 	]);
 
 	_routeInstance('cart', 'CartController', $routes, [

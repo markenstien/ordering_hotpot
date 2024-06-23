@@ -79,29 +79,34 @@
                         <p><?php echo $item->remarks?></p>
 
                         <?php
+                            $quantity = $itemOnPreview ? $itemOnPreview->quantity : 1;
                             Form::open([
                                 'method' => 'post',
                                 'action' => _route('cart:add', $item->id)
                             ]);
+                            Form::hidden('cart_id', $itemOnPreview->id ?? false);
                             Form::hidden('item_id', $item->id);
                             Form::hidden('price',$item->sell_price);
+                            Form::hidden('quantity', $quantity, [
+                                'id' => 'product-quanity'
+                            ])
                         ?>
                             <div class="row">
                                 <div class="col-auto">
                                     <ul class="list-inline pb-3">
                                         <li class="list-inline-item text-right">
                                             Quantity
-                                            <input type="hidden" name="quantity" id="product-quanity" value="1">
                                         </li>
                                         <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                        <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+                                        <li class="list-inline-item"><span class="badge bg-secondary" id="var-value"><?php echo $quantity?></span></li>
                                         <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="row pb-3">
                                 <div class="col d-grid">
-                                    <button type="submit" class="btn btn-success btn-lg" name="submit">Add To Cart</button>
+                                    <button type="submit" 
+                                        class="btn btn-success btn-lg" name="submit"><?php echo $itemOnPreview ? 'Update Item' : 'Add to Cart' ?></button>
                                 </div>
                             </div>
                         <?php Form::close()?>

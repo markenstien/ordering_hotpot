@@ -45,6 +45,10 @@
 					Flash::set("Welcome back ".whoIs('firstname')." continue your shopping");
 					return redirect(_route('cart:index'));
 				}
+
+				if(isEqual(whoIs('user_type'), 'customer')) {
+					return redirect(_route('order:index'));
+				}
 				return redirect('DashboardController');
 			}
 
@@ -107,7 +111,7 @@
 
 			$emailContent = " Good day <strong>{$user->firstname}</strong>,<br/>";
 			$emailContent .= " You Recieved this email because you used your email to register on ". COMPANY_NAME .'<br/>';
-			$emailContent .= " Verify your registration to enjoy Always new and affordable drug, prices make your hearts healthy too. <br/></br>";
+			$emailContent .= " Verify your registration to enjoy our best meals. <br/></br>";
 			$emailContent .= " Click this {$link} or use this code to activate your account : ==> ".$this->meta->retVal['code'];
 
 			$emailBody = wEmailComplete($emailContent);

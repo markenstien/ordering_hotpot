@@ -1,4 +1,7 @@
 <?php build('content') ?>
+    <?php
+        $flagCustomer = whoIs('user_type') == 'customer';
+    ?>
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">Orders</h4>
@@ -12,6 +15,7 @@
                         <th>Customer</th>
                         <th>Date</th>
                         <th>Total</th>
+                        <th>Status</th>
                         <th>Payment</th>
                         <th>Action</th>
                     </thead>
@@ -24,6 +28,7 @@
                                 <td><?php echo wLinkDefault(_route('user:show', $row->customer_id), $row->customer_name)?></td>
                                 <td><?php echo $row->created_at?></td>
                                 <td><?php echo amountHTML($row->net_amount)?></td>
+                                <td><?php echo empty($row->order_status) ? 'on-going' : $row->order_status?></td>
                                 <td>
                                     <?php
                                         $color = 'danger';
@@ -37,7 +42,9 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <?php echo wLinkDefault(_route('receipt:order', $row->id), ' Show Order');?>
+                                    <?php
+                                        echo wLinkDefault(_route('receipt:order', $row->id), ' Show Receipt');
+                                    ?>
                                 </td>
                             </tr>
                         <?php endforeach?>

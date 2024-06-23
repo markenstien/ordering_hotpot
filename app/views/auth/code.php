@@ -6,7 +6,7 @@
                     <?php Flash::show()?>
                     <div class="text-center">
                         <h4>Enter Verification Code</h4>
-                        <?php  Form::open(['method' => 'post'])?>
+                            <?php  Form::open(['method' => 'post'])?>
                             <div class="form-group mt-3">
                                 <?php Form::text('verification_code', '' , ['class' => 'form-control form-control-lg','placeholder' => 'Enter 4 Digit Verification Code'])?>
                             </div>

@@ -181,7 +181,7 @@
 
 				'attributes' => [
 					'id' => 'password',
-					'maxlength' => 20
+					'maxlength' => 20,
 				]
 			]);
 		}

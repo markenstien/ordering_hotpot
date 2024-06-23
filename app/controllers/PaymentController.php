@@ -45,14 +45,27 @@
 
         public function show($id) {
             $this->data['payment'] = $this->model->get($id);
+            $this->data['paymentImage'] = $this->model->getImage($id);
+            $this->data['order'] = $this->modelOrder->get($id);
             return $this->view('payment/show', $this->data);
         }
 
 
         public function approve($id) {
             $req = request()->inputs();
-            csrfValidate();
             $res = $this->model->approve($id);
+
+            if(!$res) {
+                Flash::set($this->model->getErrorString(), 'danger');
+            }else{
+                Flash::set($this->model->getMessageString());
+            }
+
+            return redirect(_route('receipt:order', $this->model->_getRetval('order_id')));
+        }
+
+        public function invalidate($id) {
+            $res = $this->model->invalidate($id);
 
             if(!$res) {
                 Flash::set($this->model->getErrorString(), 'danger');

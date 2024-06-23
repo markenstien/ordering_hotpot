@@ -5,6 +5,7 @@
         public function __construct()
         {
             $this->model = model('OrderModel');
+            _authRequired();
         }
         public function index() {
             if(isEqual(whoIs('user_type'),'customer')) {
@@ -18,7 +19,8 @@
         }
 
         public function show($id) {
-            csrfReload();
+            _authRequired(['admin']);
+
             $order = $this->model->getComplete($id);
 
             $this->data['order'] = $order['order'];
@@ -30,9 +32,14 @@
 
         public function voidOrder($id) {
             
-            csrfValidate();
             $res = $this->model->void($id);
             Flash::set("Order Void!");
-            return request(_route('order:show', $id));
+            return redirect(_route('receipt:order', $id));
+        }
+
+        public function complete($id) {
+            $res = $this->model->complete($id);
+            Flash::set("Order Completed!");
+            return redirect(_route('receipt:order', $id));
         }
     }

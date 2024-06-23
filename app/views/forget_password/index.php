@@ -1,4 +1,10 @@
 <?php build('content') ?>
+<div class="container-xxl py-5 bg-dark hero-header mb-5">
+    <div class="container text-center my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Forgot Password</h1>
+    </div>
+</div>
+
 	<div class="container" style="padding: 50px 0px;">
 		<div class="col-sm-12 col-md-8 mx-auto">
 			<div class="card">

@@ -133,15 +133,23 @@
                 </div>
             </nav>
             <?php if($auth) :?>
+              <?php
+                $userType = whoIs('user_type');  
+                $flagCustomer = $userType == 'customer';
+                $flagStaff = $userType == 'staff';
+                $flagAdmin = $userType == 'admin';
+              ?>
                 <nav class="bottom-navbar">
                     <div class="container">
                         <ul class="nav page-navigation">
+                            <?php if($flagStaff || $flagAdmin) :?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo _route('dashboard:index')?>">
                                     <i class="link-icon" data-feather="box"></i>
                                     <span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
+                            <?php endif?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo _route('order:index') ?>">
                                     <i class="link-icon" data-feather="box"></i>
@@ -161,23 +169,24 @@
                                 </a>
                             </li>
 
+                            <?php if($flagStaff || $flagAdmin) :?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo _route('item:index')?>">
                                     <i class="link-icon" data-feather="box"></i>
                                     <span class="menu-title">Products</span>
                                 </a>
                             </li>
+                            <?php endif?>
 
-                            <div style="display: none;">
-                              <?php if(isEqual(whoIs('user_type'),'customer')) :?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo _route('home:shop')?>">
-                                        <i class="link-icon" data-feather="box"></i>
-                                        <span class="menu-title">Shop now</span>
-                                    </a>
-                                </li>
-                              <?php endif?>
-                            </div>
+                            <?php if(isEqual(whoIs('user_type'),'customer')) :?>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="<?php echo _route('home:shop')?>">
+                                      <span class="menu-title">
+                                        <span class="badge bg-success">Order Now</span>
+                                      </span>
+                                  </a>
+                              </li>
+                            <?php endif?>
                             
                             <?php if(isEqual($auth->user_type, ['admin','supervisor'])) :?>
                             <li class="nav-item">

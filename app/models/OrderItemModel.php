@@ -54,8 +54,10 @@
 
                 $orderItemData['sold_price'] = $this->_calculateSoldPrice($orderItemData);
                 $orderItemData['order_id'] = $order_id;
+                $this->addMessage("Item added to cart");
                 return parent::store($orderItemData);
             } else {
+                $this->addMessage("Cart Updated");
                 $orderItemData['sold_price'] = $this->_calculateSoldPrice($orderItemData);
                 return parent::update($orderItemData, $id);
             }

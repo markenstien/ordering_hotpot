@@ -19,10 +19,7 @@
 		public static function get($name)
 		{
 			$cookieName = strtoupper(self::$prefix.$name);
-
-			if(!isset($_COOKIE[$cookieName]))
-				return '';
-			return $_COOKIE[$cookieName];
+			return $_COOKIE[$cookieName] ?? '';
 		}
 
 

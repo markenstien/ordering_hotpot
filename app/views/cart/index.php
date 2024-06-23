@@ -44,7 +44,6 @@
 									<td><?php echo $row->quantity?></td>
 									<td><?php echo amountHTML($itemPriceTotal, 'PHP')?></td>
 									<td>
-										<?php echo wLinkDefault('#', 'Edit')?> | 
 										<?php echo wLinkDefault(_route('cart:delete', $row->id), 'Delete')?>
 									</td>
 								</tr>

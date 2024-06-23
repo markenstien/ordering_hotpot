@@ -102,4 +102,12 @@
 
             return true;
         }
+
+        public function complete($id) {
+            $result = parent::update([
+                'order_status' => 'completed'
+            ], $id);
+
+            return $result;
+        }
     }

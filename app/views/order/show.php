@@ -9,7 +9,7 @@
                 </div>
             <?php endif?>
             <h1>#<?php echo $order->reference?></h1>
-            <p>Order Receipt</p>
+            <?php echo wLinkDefault(_route('receipt:order', $order->id), 'Order Receipt') ?>
         </div>
         <h3>Customer Info</h3>
         <table class="table table-bordered">
