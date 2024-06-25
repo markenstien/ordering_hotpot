@@ -17,7 +17,7 @@
         }
 
         public function index() {
-            $items = $this->model->all(null,'id desc');
+            $items = $this->model->getAll();
             foreach($items as $key => $row) {
                 $row->image = $this->model->getSingleImage($row->id);
             }

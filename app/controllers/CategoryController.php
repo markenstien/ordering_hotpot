@@ -9,6 +9,7 @@
         {
             $this->model = model('CategoryModel');
             $this->categoryForm = new CategoryForm();
+            $this->data['page_title'] = 'Category';
         }
 
         public function index() {

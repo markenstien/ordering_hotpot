@@ -45,7 +45,10 @@
 	}
 
 
-	function _notify_operations($message , $attributes = [])
+	/**
+	 * use id for additional recipients
+	 */
+	function _notify_operations($message , $attributes = [], $additionalRecipients = [])
 	{	
 		/*
 		*recipient id's must be changeable always
@@ -57,15 +60,16 @@
 			'where' => [
 				'user_type' => [
 					'condition' => 'in',
-					'value' => ['doctor' , 'admin']
+					'value' => ['admin', 'staff', 'supervisor']
 				]
 			]
 		]);
 
 
+		$recipientIds = [];
+		$recipientIds = array_merge($recipientIds, $additionalRecipients);
 		if($users) 
 		{
-			$recipientIds = [];
 			foreach($users as $user){
 				array_push($recipientIds , $user->id);
 			}

@@ -26,6 +26,7 @@
 			</div>
 
 			<div class="card-body">
+				<?php Flash::show()?>
 				<div class="mb-4">
 					<div class="form-group row mb-2">
 						<div class="col-md-6">
@@ -62,14 +63,13 @@
 						<tbody>
 							<?php $totalAmount = 0?>
 							<?php foreach($items as $key => $row) :?>
-								<?php $itemPriceTotal = ($row->quantity * $row->sold_price)?>
-								<?php $totalAmount += $itemPriceTotal?>
+								<?php $totalAmount += $row->sold_price?>
 								<tr>
 									<td><?php echo ++$key?></td>
 									<td><?php echo wLinkDefault(_route('home:catalog-view', $row->item_id), $row->name)?></td>
-									<td><?php echo $row->sold_price?></td>
+									<td><?php echo amountHTML($row->price)?></td>
 									<td><?php echo $row->quantity?></td>
-									<td><?php echo amountHTML($itemPriceTotal)?></td>
+									<td><?php echo amountHTML($row->sold_price)?></td>
 								</tr>
 							<?php endforeach?>
 						</tbody>

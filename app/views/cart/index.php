@@ -35,14 +35,13 @@
 						<tbody>
 							<?php $totalAmount = 0?>
 							<?php foreach($items as $key => $row) :?>
-								<?php $itemPriceTotal = ($row->quantity * $row->sold_price)?>
-								<?php $totalAmount += $itemPriceTotal?>
+								<?php $totalAmount += $row->sold_price?>
 								<tr>
 									<td><?php echo ++$key?></td>
 									<td> <img src="<?php echo $row->image->full_url ?? ''?>" alt="" style="width: 50px;"> <?php echo wLinkDefault(_route('home:catalog-view', $row->item_id), $row->name)?></td>
-									<td><?php echo amountHTML($row->sold_price, 'PHP')?></td>
+									<td><?php echo amountHTML($row->price, 'PHP')?></td>
 									<td><?php echo $row->quantity?></td>
-									<td><?php echo amountHTML($itemPriceTotal, 'PHP')?></td>
+									<td><?php echo amountHTML($row->sold_price, 'PHP')?></td>
 									<td>
 										<?php echo wLinkDefault(_route('cart:delete', $row->id), 'Delete')?>
 									</td>

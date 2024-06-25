@@ -23,11 +23,7 @@
                                 <td><?php echo ++$key?></td>
                                 <td><?php echo $row->name?></td>
                                 <td><?php echo $row->category?></td>
-                                <td>
-                                    <?php
-                                        echo $row->active ? 'Active' : 'Not Active';
-                                    ?>
-                                </td>
+                                <td><?php echo wBadgeWrap($row->active ? 'Active' : 'Not Active', $row->active ? 'success' : 'danger');?> </td>
                                 <td>
                                     <?php echo wLinkDefault(_route('category:edit', $row->id),'Edit')?> | 
                                     <?php echo wLinkDefault(_route('category:deactivate', $row->id),'Activate Or Deactivate')?>

@@ -22,6 +22,10 @@
                 if($res) {
                     Flash::set("Payment Created!");
 
+                    if(isEqual(whoIs('user_type'), ['admin', 'staff']) ) {
+                        $this->model->approve($res);
+                    }
+
                     if(!upload_empty('file')){
                         $upload = $this->_attachmentModel->upload([
                             'display_name' => 'Payment Image proof',

@@ -40,8 +40,7 @@
                 'options' => [
                     'label' => 'Category',
                     'option_values' => [
-                        CategoryService::BRAND,
-                        CategoryService::MANUFACTURER
+                        CategoryService::PRODUCT_CATEGORY,
                     ]
                 ],
                 'class' => 'form-control'

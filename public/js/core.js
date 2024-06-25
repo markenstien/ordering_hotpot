@@ -1,4 +1,4 @@
-const URL = 'http://dev.medimart';
+const URL = 'http://dev.hotpot';
 const DS  = '/';
 
 const getURL = function(called_url = null){

@@ -2,7 +2,8 @@
 <?php build('content')?>
 	<div class="card">
 		<div class="card-header">
-			<?php echo wLinkDefault(_route('home:reservation'), 'Make Appointment')?>
+			<h4 class="card-title">Reservations</h4>
+			<?php echo wLinkDefault(_route('home:reservation'), 'Make Reservation')?>
 		</div>
 		<div class="card-body">
 			<?php Flash::show()?>

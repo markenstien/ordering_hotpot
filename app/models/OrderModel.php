@@ -58,6 +58,7 @@
             $orderData['date_time'] = now();
             $orderData['staff_id'] = whoIs('id');
             $orderData['is_paid'] = false;
+
             $orderDataUpdate = parent::update($orderData, $orderData['id']);
 
             if(!is_null($paymentData)) {
@@ -72,9 +73,17 @@
                 foreach ($items as $key => $row) {
                     $this->item->deductStock($row->item_id, $row->quantity);
                 }
+
+                $message = " New Order has been placed as of " . now();
+                if(!empty($orderData['reference'])) {
+                    $message .= "#{$orderData['reference']}";
+                }
+                $orderLink = _route('receipt:order', $orderData['id']);
+                _notify_operations($message, ['href' => $orderLink], [whoIs('id')]);
+
                 return true;
             }
-
+            
             $this->addError("Something went wrong!");
             return false;
         }

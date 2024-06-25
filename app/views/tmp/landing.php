@@ -712,6 +712,8 @@
 
     <!-- Template Javascript -->
     <script src="<?php echo _path_tmp('landing-resto/js/main.js')?>"></script>
+    <script src="<?php echo _path_public('js/core.js')?>"></script>
+    <script src="<?php echo _path_public('js/global.js')?>"></script>
 
     <?php produce('scripts') ?>
 </body>

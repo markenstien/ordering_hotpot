@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-lg-5 mt-5">
                 <div class="card mb-3 main-image-container">
-                    <div class="img-magnifier-container">
+                    <div>
                         <img class="card-img img-fluid" src="<?php echo $item->images[0]->full_url ?? ''?>" 
                         alt="Card image cap" id="product-detail">
                     </div>
@@ -73,7 +73,7 @@
                     <div class="card-body">
                         <?php Flash::show()?>
                         <h1 class="h2"><?php echo $item->name?></h1>
-                        <label for="#">(#<?php echo $item->sku?>)</label>
+                        <span class="badge bg-info"><?php echo $item->category_name?></span>
                         <p class="h3 py-2">PHP <?php echo amountHTML($item->sell_price)?></p>
                         <h6>Remarks</h6>
                         <p><?php echo $item->remarks?></p>
@@ -153,7 +153,6 @@
 
 <?php build('styles')?>
 <style>
-    * {box-sizing: border-box;}
 
     .img-magnifier-container {
         position:relative;

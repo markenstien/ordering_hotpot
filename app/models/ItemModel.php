@@ -134,6 +134,7 @@
             $this->db->query(
                 "SELECT item.*, ifnull(manufacturer.name, 'Not Specified') as manufacturer_name,
                     ifnull(brand.name, 'Not Specified') as brand_name,
+                    ifnull(category.name, 'Not Specified') as category_name,
                     ifnull(stock.total_stock, 'No Stock') as total_stock
                     FROM {$this->table} as item
                     LEFT JOIN categories as brand
@@ -141,6 +142,9 @@
                     
                     LEFT JOIN categories as manufacturer
                     on manufacturer.id = item.manufacturer_id
+
+                    LEFT JOIN categories as category
+                    on category.id = item.category_id
 
                     LEFT JOIN ($productQuantitySQL) as stock
                     ON stock.item_id = item.id

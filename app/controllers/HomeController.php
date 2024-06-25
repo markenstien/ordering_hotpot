@@ -1,14 +1,16 @@
 <?php
 
 	use Form\AppointmentForm;
+	use Services\CategoryService;
 	use Services\UserService;
 
 	load(['AppointmentForm'], APPROOT.DS.'form');
-	load(['UserService'], SERVICES);
+	load(['UserService', 'CategoryService'], SERVICES);
 
 	class HomeController extends Controller
 	{
 		private $modelItem, $modelOrder, $modelUser, $modelOrderItem;
+		private $categoryModel;
 		public function __construct()
 		{
 			parent::__construct();
@@ -16,6 +18,7 @@
 			$this->modelOrder = model('OrderModel');
 			$this->modelOrderItem = model('OrderItemModel');
 			$this->modelUser = model('UserModel');
+			$this->categoryModel = model('CategoryModel');
 		}
 
 		private function requireTerms() {
@@ -81,20 +84,27 @@
 			$this->requireTerms();
 			$req = request()->inputs();
 			$keyword = $req['q'] ?? '';
+			$categoryId = !empty($req['category_id']) ? $req['category_id'] : NULL; 
 
+			$condition = null;
+
+			if(!empty($categoryId)) {
+				$condition['category_id'] = $categoryId;
+			}
+			
 			$this->data['items'] = $this->modelItem->getAll([
-				'where' => [
-					'item.name' => [
-						'condition' => 'like',
-						'value' => "%{$keyword}%",
-						'concatinator' => 'OR'
-					],
-					'brand.name' => [
-						'condition' => 'like',
-						'value' => "%{$keyword}%"
-					]
-				]
+				'order' => 'item.name asc',
+				'where' => $condition
 			]);
+
+			$this->data['categories'] = $this->categoryModel->all([
+                'active' => 1,
+                'category' => CategoryService::PRODUCT_CATEGORY
+            ],'name asc');
+
+            $categorySelectOptions = arr_layout_keypair($this->data['categories'],['id','name']);
+			$this->data['categorySelectOptions'] = $categorySelectOptions;
+
 			$this->data['page'] = [
 				'metaTitle' => 'Shop Now!'
 			]; 

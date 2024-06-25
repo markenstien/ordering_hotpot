@@ -24,4 +24,16 @@
                 return ee(api_response($data));
             }
         }
+
+        public function searchProductByCategoryId() {
+            $req = request()->inputs();
+            if(!empty($req['category_id'])) {
+                $data = $this->itemModel->getAll([
+                    'where' => [
+                        'category_id' => $req['category_id']
+                    ]
+                ]);
+                return ee(api_response($data));
+            }
+        }
     }

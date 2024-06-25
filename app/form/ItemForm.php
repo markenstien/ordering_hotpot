@@ -123,7 +123,7 @@
             
             $categories = $this->categoryModel->all([
                 'active' => 1,
-                'category' => CategoryService::ITEM
+                'category' => CategoryService::PRODUCT_CATEGORY
             ],'name asc');
             $categories = arr_layout_keypair($categories,['id','name']);
             $this->add([

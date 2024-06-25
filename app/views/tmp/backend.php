@@ -143,70 +143,82 @@
                     <div class="container">
                         <ul class="nav page-navigation">
                             <?php if($flagStaff || $flagAdmin) :?>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="<?php echo _route('dashboard:index')?>">
+                                      <i class="link-icon" data-feather="box"></i>
+                                      <span class="menu-title">Dashboard</span>
+                                  </a>
+                              </li>
+                            <?php endif?>
+
+                            <?php if(isEqual($auth->user_type, ['admin','supervisor'])) :?>
+                              <li class="nav-item">
+                                  <a href="#" class="nav-link">
+                                      <i class="link-icon" data-feather="heart"></i>
+                                      <span class="menu-title">Product</span>
+                                      <i class="link-arrow"></i>
+                                  </a>
+                                  <div class="submenu">
+                                      <ul class="submenu-item">
+                                          <li class="nav-item"><a class="nav-link" href="<?php echo _route('category:index')?>">Category</a></li>
+                                          <li class="nav-item"><a class="nav-link" href="<?php echo _route('item:index')?>">Products</a></li>
+                                          <li class="nav-item"><a class="nav-link" href="<?php echo _route('stock:index')?>">Inventory</a></li>
+                                      </ul>
+                                  </div>
+                              </li>
+                            <?php endif?>
+
+                            <?php if(isEqual($auth->user_type, ['admin','supervisor'])) :?>
+                              <li class="nav-item">
+                                  <a href="#" class="nav-link">
+                                      <i class="link-icon" data-feather="slack"></i>
+                                      <span class="menu-title">Transactions</span>
+                                      <i class="link-arrow"></i>
+                                  </a>
+                                  <div class="submenu">
+                                      <ul class="submenu-item">
+                                          <li class="nav-item"><a class="nav-link" href="<?php echo _route('order:index')?>">Orders</a></li>
+                                          <li class="nav-item"><a class="nav-link" href="<?php echo _route('payment:index')?>">Payments</a></li>
+                                          <li class="nav-item"><a class="nav-link" href="<?php echo _route('appointment:index')?>">Reservation</a></li>
+
+                                      </ul>
+                                  </div>
+                              </li>
+                            <?php endif?>
+
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo _route('dashboard:index')?>">
-                                    <i class="link-icon" data-feather="box"></i>
-                                    <span class="menu-title">Dashboard</span>
+                                <a class="nav-link" href="<?php echo _route('user:index')?>">
+                                    <i class="link-icon" data-feather="users"></i>
+                                    <span class="menu-title">Users</span>
                                 </a>
                             </li>
-                            <?php endif?>
+
+                            <?php if($flagCustomer) :?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo _route('order:index') ?>">
-                                    <i class="link-icon" data-feather="box"></i>
+                                    <i class="link-icon" data-feather="slack"></i>
                                     <span class="menu-title">Orders</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo _route('appointment:index') ?>">
-                                    <i class="link-icon" data-feather="box"></i>
+                                    <i class="link-icon" data-feather="paperclip"></i>
                                     <span class="menu-title">Reservations</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo _route('user:index')?>">
-                                    <i class="link-icon" data-feather="box"></i>
-                                    <span class="menu-title">Users</span>
-                                </a>
-                            </li>
 
-                            <?php if($flagStaff || $flagAdmin) :?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo _route('item:index')?>">
-                                    <i class="link-icon" data-feather="box"></i>
-                                    <span class="menu-title">Products</span>
-                                </a>
-                            </li>
-                            <?php endif?>
-
-                            <?php if(isEqual(whoIs('user_type'),'customer')) :?>
-                              <li class="nav-item">
                                   <a class="nav-link" href="<?php echo _route('home:shop')?>">
                                       <span class="menu-title">
-                                        <span class="badge bg-success">Order Now</span>
+                                        <span class="badge bg-success font-lg">Order Now <i class="link-icon" data-feather="shopping-cart"></i> </span>
                                       </span>
                                   </a>
                               </li>
                             <?php endif?>
-                            
-                            <?php if(isEqual($auth->user_type, ['admin','supervisor'])) :?>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="link-icon" data-feather="settings"></i>
-                                    <span class="menu-title">Others</span>
-                                    <i class="link-arrow"></i>
-                                </a>
-                                <div class="submenu">
-                                    <ul class="submenu-item">
-                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('payment:index')?>">Payments</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="<?php echo _route('stock:index')?>">Stocks</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <?php endif?>
 
                             <?php if(isEqual($auth->user_type, ['admin'])) :?>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="<?php echo _route('report:index')?>" class="nav-link">
                                     <i class="link-icon" data-feather="hash"></i>
                                     <span class="menu-title">Reports</span></a>
                             </li>

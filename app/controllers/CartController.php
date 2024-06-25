@@ -63,6 +63,8 @@
                     return request()->return();
                 }
 
+				$order = $this->modelOrder->get($session);
+
                 $orderData = [
                     'customer_name' => empty($post['payer_name']) ? 'Guest' : $post['payer_name'],
                     'mobile_number' => $post['mobile_number'],
@@ -72,10 +74,10 @@
                     'net_amount' => $itemSummary['netAmount'],
                     'discount_amount' => $itemSummary['discountAmount'],
                     'id' => $session,
-					'customer_id' => whoIs('id')
+					'customer_id' => whoIs('id'),
+					'reference' => $order->reference
                 ];
-
-				$order = $this->modelOrder->get($session);
+				
                 $orderResponse = $this->modelOrder->placeAndPay($orderData, null);
                 if($orderResponse) {
 					$itemsList = "";

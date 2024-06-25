@@ -82,10 +82,6 @@
 					'subject' => $subject
 				]
 			]);
-
-			echo '<div style="margin-top:50px"> </div>';
-			echo $body;
-			die();
 		}
 		$mailer->setSubject($subject)
 		->setBody($body);
@@ -116,24 +112,29 @@
 			}
 		}
 
-		if(is_array($receiver))
-		{
-			try{
-				$mailer->sendToMany($receiver);
-
-				return true;
-			}catch(Exception $e)
+		if(SYSTEM_MODE == 'up') {
+			if(is_array($receiver))
 			{
-				return $e->getMessage();
+				try{
+					$mailer->sendToMany($receiver);
+
+					return true;
+				}catch(Exception $e)
+				{
+					return $e->getMessage();
+				}
+			}else{
+				$mailer->setReciever($receiver);
+				try{
+					$mailer->send();
+					return true;
+				}catch(Exception $e) {
+					return $e->getMessage();
+				}
 			}
-		}else{
-			$mailer->setReciever($receiver);
-			try{
-				$mailer->send();
-				return true;
-			}catch(Exception $e) {
-				return $e->getMessage();
-			}
+		} else {
+			echo '<div style="margin-top:50px"> </div>';
+			echo $body;
 		}
 	}
 

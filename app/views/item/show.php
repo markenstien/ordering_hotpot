@@ -26,8 +26,8 @@
                                     <td><?php echo $item->sku?></td>
                                 </tr>
                                 <tr>
-                                    <td>Barcode : </td>
-                                    <td><?php echo empty($item->barcode) ? 'N/A' : $item->barcode?></td>
+                                    <td>Category : </td>
+                                    <td><?php echo empty($item->category_name) ? 'N/A' : $item->category_name?></td>
                                 </tr>
                                 <tr>
                                     <td>Cost Price : </td>

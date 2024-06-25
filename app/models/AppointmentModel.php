@@ -162,10 +162,7 @@
 
 		public function getBill($id)
 		{
-			$bill_model = model('BillModel');
-			$bill = $bill_model->getByAppointment($id);
-
-			return $bill;
+			return false;
 		}
 
 		public function updateStatus($id , $status)

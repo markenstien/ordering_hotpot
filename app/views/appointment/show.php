@@ -5,7 +5,6 @@
 			<div class="card">
 				<div class="card-header">
 					<h4 class="card-title">Reservation Preview</h4>
-					<label><?php echo $appointment->type?></label>
 				</div>
 
 				<div class="card-body">
@@ -62,10 +61,11 @@
 						</table>
 					</div>
 				</div>
-
 				<div class="card-footer">
-					<a href="<?php echo _route('appointment:approve', $appointment->id)?>" class="btn btn-primary btn-lg">Arrived</a>
-					<a href="<?php echo _route('appointment:cancel', $appointment->id)?>" class="btn btn-danger btn-lg">Cancelled</a>
+					<?php if(isEqual($appointment->status, ['pending', 'scheduled'])) :?>
+						<a href="<?php echo _route('appointment:approve', $appointment->id)?>" class="btn btn-primary btn-lg">Arrived</a>
+						<a href="<?php echo _route('appointment:cancel', $appointment->id)?>" class="btn btn-danger btn-lg">Cancelled</a>
+					<?php endif?>
 				</div>
 			</div>
 		</div>
