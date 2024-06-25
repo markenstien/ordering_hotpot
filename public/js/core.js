@@ -1,4 +1,4 @@
-const URL = 'http://dev.hotpot';
+const URL = 'https://hotplate.one';
 const DS  = '/';
 
 const getURL = function(called_url = null){
