@@ -583,7 +583,7 @@
 
                 $reviews = $modelReviewModel->getCompanyReviews([
                     'where' => [
-                        'review.is_visible' => false
+                        'review.is_visible' => true
                     ]
                 ]);
             ?>
