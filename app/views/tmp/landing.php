@@ -576,56 +576,41 @@
 
         <!-- Testimonial Start -->
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <?php
+                if(!isset($modelReviewModel)) {
+                    $modelReviewModel = model('CommonTextModel');
+                }
+
+                $reviews = $modelReviewModel->getCompanyReviews([
+                    'where' => [
+                        'review.is_visible' => false
+                    ]
+                ]);
+            ?>
             <div class="container">
                 <div class="text-center">
                     <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonial</h5>
                     <h1 class="mb-5">Our Clients Say!!!</h1>
                 </div>
                 <div class="owl-carousel testimonial-carousel">
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
+                    <?php 
+                        if($reviews) {
+                            foreach($reviews as $key => $row) {
+                                ?> 
+                                <div class="testimonial-item bg-transparent border rounded p-4">
+                                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                                    <p><?php echo $row->text_content?></p>
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-fluid flex-shrink-0 rounded-circle" src="<?php echo $row->reviewer_profile?>" style="width: 50px; height: 50px;">
+                                        <div class="ps-3">
+                                            <h5 class="mb-1"><?php echo $row->reviewer_name?></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -638,38 +623,36 @@
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
-                        <a class="btn btn-link" href="">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="">Reservation</a>
-                        <a class="btn btn-link" href="">Privacy Policy</a>
-                        <a class="btn btn-link" href="">Terms & Condition</a>
+                        <a class="btn btn-link" href="<?php echo _route('home:index')?>">Home</a>
+                        <a class="btn btn-link" href="<?php echo _route('home:shop')?>">Menu</a>
+                        <a class="btn btn-link" href="<?php echo _route('home:reservation')?>">Reservation</a>
+                        <a class="btn btn-link" href="<?php echo _route('auth:login')?>">Login</a>
+                        <a class="btn btn-link" href="<?php echo _route('home:terms')?>">Terms & Condition</a>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                        <div class="d-flex pt-2">
+                    <div class="col-lg-5 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4" id="contact">Contact</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">Hot Plate Sizzling House ,094 Gen. Trias Dr, Rosario, 4106 Cavite</li>
+                                <li class="mb-3">Hot Plate Sizzling House,Reparo Road, Santa Quiteria Rd, Reparo Rd, Caloocan, 1401 Metro Manila</li>
+                                <li>Hot Plate Sizzling House,  Brgy, Lhinette Homes, B9 L1, Tanza, 4108 Cavite</li>
+                            </ul>
+                        </p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>09171496844</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>adrian03.asistin03@gmail.com</p>
+                        <div class="d-flex pt-2 sr-only">
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
                         <h5 class="text-light fw-normal">Monday - Saturday</h5>
                         <p>09AM - 09PM</p>
                         <h5 class="text-light fw-normal">Sunday</h5>
                         <p>10AM - 08PM</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
-                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -678,14 +661,6 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#"><?php echo COMPANY_NAME?></a>, All Right Reserved.
-                        </div>
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="footer-menu">
-                                <a href="">Home</a>
-                                <a href="">Cookies</a>
-                                <a href="">Help</a>
-                                <a href="">FQAs</a>
-                            </div>
                         </div>
                     </div>
                 </div>

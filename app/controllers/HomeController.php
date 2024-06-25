@@ -10,7 +10,7 @@
 	class HomeController extends Controller
 	{
 		private $modelItem, $modelOrder, $modelUser, $modelOrderItem;
-		private $categoryModel;
+		private $categoryModel, $modelReview;
 		public function __construct()
 		{
 			parent::__construct();

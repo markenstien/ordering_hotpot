@@ -20,7 +20,7 @@
                <a href="<?php echo _route('auth:login')?>" class="nav-item nav-link">Login</a>
                <?php endif?>
                <a href="<?php echo _route('cart:index')?>" class="nav-item nav-link">Cart</a>
-               <a href="#" class="nav-item nav-link">Contact</a>
+               <a href="#contact" class="nav-item nav-link">Contact</a>
             </div>
         </div>
     </nav>

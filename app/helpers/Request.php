@@ -48,15 +48,22 @@
 			return $fields;
 		}
 
-		public function post($name)
+		public function post($name = null)
 		{
 			$this->is_post(); // for valdiation
+			
 
-			$method = $this->method;
+			$fields = [];
 
-			if(isset($_POST[$name]))
-				return $_POST[$name];
-			return '';
+			foreach($_POST as $key => $row) 
+			{
+				if( in_array(strtolower($key) , $this->runTimeVars ))
+					continue;
+
+				$fields[$key] = $row;
+			}
+
+			return is_null($name) ? $fields : $fields[$name] ?? '';
 		}
 
 		public function get($name = null)

@@ -18,7 +18,7 @@
 		public function index()
 		{
 			_requireAuth();
-			$params = request()->inputs();
+			$params = request()->get();
 
 			if(!empty($params))
 			{
@@ -119,7 +119,7 @@
 				'customer_id' => whoIs('id')
 			], 'id desc');
 
-			$this->data['req'] = request()->inputs();
+			$this->data['req'] = request()->get();
 			$this->data['id'] = $id;
 			return $this->view('user/show' , $this->data);
 		}

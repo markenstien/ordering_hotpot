@@ -194,27 +194,34 @@
                             </li>
 
                             <?php if($flagCustomer) :?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo _route('order:index') ?>">
-                                    <i class="link-icon" data-feather="slack"></i>
-                                    <span class="menu-title">Orders</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo _route('appointment:index') ?>">
-                                    <i class="link-icon" data-feather="paperclip"></i>
-                                    <span class="menu-title">Reservations</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                  <a class="nav-link" href="<?php echo _route('home:shop')?>">
-                                      <span class="menu-title">
-                                        <span class="badge bg-success font-lg">Order Now <i class="link-icon" data-feather="shopping-cart"></i> </span>
-                                      </span>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="<?php echo _route('order:index') ?>">
+                                      <i class="link-icon" data-feather="slack"></i>
+                                      <span class="menu-title">Orders</span>
                                   </a>
                               </li>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="<?php echo _route('appointment:index') ?>">
+                                      <i class="link-icon" data-feather="paperclip"></i>
+                                      <span class="menu-title">Reservations</span>
+                                  </a>
+                              </li>
+
+                              <li class="nav-item">
+                                    <a class="nav-link" href="<?php echo _route('home:shop')?>">
+                                        <span class="menu-title">
+                                          <span class="badge bg-success font-lg">Order Now <i class="link-icon" data-feather="shopping-cart"></i> </span>
+                                        </span>
+                                    </a>
+                                </li>
                             <?php endif?>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo _route('common-text:index') ?>">
+                                    <i class="link-icon" data-feather="thumbs-up"></i>
+                                    <span class="menu-title">Reviews</span>
+                                </a>
+                            </li>
 
                             <?php if(isEqual($auth->user_type, ['admin'])) :?>
                             <li class="nav-item">

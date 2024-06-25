@@ -257,6 +257,10 @@
 		'approve' => 'approve',
 	]);
 
+	_routeInstance('common-text', 'CommonTextController', $routes, [
+		'approve' => 'approve',
+		'deny' => 'deny',
+	]);
 
 	return $routes;
 ?>
