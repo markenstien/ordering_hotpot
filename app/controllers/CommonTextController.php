@@ -38,12 +38,14 @@
                     Flash::set('Invalid review', 'danger');
                     return request()->return();
                 }
-                $this->commonTextModel->store([
+                $resp = $this->commonTextModel->store([
                     'text_content' => $post['text_content'],
                     'owner_id' => whoIs('id'),
                     'catalog'  => 'company_reviews',
                     'is_visible' => false
                 ]);
+                Flash::set('Review Created');
+                return redirect(_route('common-text:show', $resp));
             }
             return $this->view('commontext/create', $this->data);
         }
