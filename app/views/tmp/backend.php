@@ -186,12 +186,14 @@
                               </li>
                             <?php endif?>
 
+                            <?php if($flagAdmin) :?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo _route('user:index')?>">
                                     <i class="link-icon" data-feather="users"></i>
                                     <span class="menu-title">Users</span>
                                 </a>
                             </li>
+                            <?php endif?>
 
                             <?php if($flagCustomer) :?>
                               <li class="nav-item">

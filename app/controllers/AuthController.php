@@ -18,6 +18,12 @@
 			$this->serviceOrder = new OrderService();
 		}
 
+		private function requireTerms() {
+			if(!isEqual(Cookie::get('terms'), 'agreed')) {
+				return redirect(_route('home:terms'));
+			}
+		}
+
 		public function index()
 		{
 			return $this->login();
@@ -25,6 +31,7 @@
 
 		public function login()
 		{
+			$this->requireTerms();
 			if(isSubmitted())
 			{
 				$post = request()->posts();
@@ -73,7 +80,7 @@
 
 
 		public function register() {
-
+			$this->requireTerms();
 			if(isSubmitted()) {
 				$post = request()->posts();
 
