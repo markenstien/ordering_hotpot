@@ -193,6 +193,13 @@
                                     <span class="menu-title">Users</span>
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo _route('bank-org:index')?>">
+                                    <i class="link-icon" data-feather="book-open"></i>
+                                    <span class="menu-title">Bank orgs</span>
+                                </a>
+                            </li>
                             <?php endif?>
 
                             <?php if($flagCustomer) :?>
