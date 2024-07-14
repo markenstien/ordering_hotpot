@@ -26,7 +26,7 @@
                                 <td><?php echo wBadgeWrap($row->active ? 'Active' : 'Not Active', $row->active ? 'success' : 'danger');?> </td>
                                 <td>
                                     <?php echo wLinkDefault(_route('category:edit', $row->id),'Edit')?> | 
-                                    <?php echo wLinkDefault(_route('category:deactivate', $row->id),'Activate Or Deactivate')?>
+                                    <?php echo wLinkDefault(_route('category:deactivate', $row->id),'Enable Or Disable')?>
                                 </td>
                             </tr>
                         <?php endforeach?>

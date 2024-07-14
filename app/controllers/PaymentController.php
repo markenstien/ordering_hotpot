@@ -43,11 +43,13 @@
         }
 
         public function index() {
+            _authRequired();
             $this->data['payments'] = $this->model->all(['is_removed' => false, 'id desc']);
             return $this->view('payment/index', $this->data);
         }
 
         public function show($id) {
+            _authRequired();
             $this->data['payment'] = $this->model->get($id);
             $this->data['paymentImage'] = $this->model->getImage($id);
             $this->data['order'] = $this->modelOrder->get($id);
@@ -56,6 +58,7 @@
 
 
         public function approve($id) {
+            _authRequired();
             $req = request()->inputs();
             $res = $this->model->approve($id);
 
@@ -69,6 +72,7 @@
         }
 
         public function invalidate($id) {
+            _authRequired();
             $res = $this->model->invalidate($id);
 
             if(!$res) {

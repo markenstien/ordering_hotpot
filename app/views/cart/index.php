@@ -38,7 +38,8 @@
 								<?php $totalAmount += $row->sold_price?>
 								<tr>
 									<td><?php echo ++$key?></td>
-									<td> <img src="<?php echo $row->image->full_url ?? ''?>" alt="" style="width: 50px;"> <?php echo wLinkDefault(_route('home:catalog-view', $row->item_id), $row->name)?></td>
+									<td> <img src="<?php echo $row->image->full_url ?? ''?>"
+										 alt="" style="width: 50px;"> <?php echo wLinkDefault(_route('home:catalog-view', $row->item_id), $row->name)?></td>
 									<td><?php echo amountHTML($row->price, 'PHP')?></td>
 									<td><?php echo $row->quantity?></td>
 									<td><?php echo amountHTML($row->sold_price, 'PHP')?></td>
@@ -59,8 +60,12 @@
 				<div class="card-footer">
 					<div class="row">
 						<div class="col-md-6">
-							<?php echo wLinkDefault(_route('cart:checkout'), 'Checkout', [
+							<?php echo wLinkDefault(_route('home:shop'), 'Continue Ordering', [
 								'class' => 'btn btn-primary btn-lg'
+							])?>
+
+							<?php echo wLinkDefault(_route('cart:checkout'), 'Checkout', [
+								'class' => 'btn btn-success btn-lg'
 							])?>
 						</div>
 						<div class="col-md-6" style="text-align:right">

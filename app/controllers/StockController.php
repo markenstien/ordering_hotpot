@@ -6,6 +6,7 @@
     {
         public function __construct()
         {
+            _authRequired();
             $this->data['stock_form'] = new StockForm();
             $this->model = model('StockModel');
             $this->itemModel = model('ItemModel');

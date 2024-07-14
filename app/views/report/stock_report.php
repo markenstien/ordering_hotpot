@@ -1,7 +1,8 @@
 <?php build('content') ?>
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Sales Report</h4>
+            <h4 class="card-title">Stocks Report</h4>
+            <?php Flash::show()?>
         </div>
 
         <div class="card-body">

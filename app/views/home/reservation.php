@@ -36,9 +36,13 @@
                 <?php echo $appointmentForm->getRow('notes')?>
             </div>
             
+            <?php if(!whoIs()) :?>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-sm">Reserve</button>
             </div>
+            <?php else :?>
+                <p>To reserve you must have an account with us <?php echo wLinkDefault( _route('auth:register'), 'Register here.')?></p>
+            <?php endif?>
         <?php echo $appointmentForm->end() ?>
     </div>
 </div>

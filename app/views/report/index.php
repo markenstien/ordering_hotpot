@@ -3,6 +3,7 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Report</h4>
+                <?php Flash::show()?>
             </div>
 
             <div class="card-body">
@@ -13,7 +14,7 @@
                     </tr>
 
                     <tr>
-                        <td>Inventory Report</td>
+                        <td>Stocks Report</td>
                         <td><a href="<?php echo _route('report:stocks')?>" class="btn btn-primary btn-lg">Prepare</a></td>
                     </tr>
                 </table>

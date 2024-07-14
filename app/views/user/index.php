@@ -15,6 +15,7 @@
 						<th>Name</th>
 						<th>Gender</th>
 						<th>Phone Number</th>
+						<th>Email</th>
 						<th>Type</th>
 						<th>Action</th>
 					</thead>
@@ -25,6 +26,7 @@
 								<td><?php echo $row->lastname . ' , ' .$row->firstname?></td>
 								<td><?php echo $row->gender ?></td>
 								<td><?php echo $row->phone ?></td>
+								<td><?php echo $row->email ?></td>
 								<td><?php echo $row->user_type ?></td>
 								<td>
 									<?php 

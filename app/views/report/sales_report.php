@@ -2,6 +2,7 @@
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">Sales Report</h4>
+            <?php Flash::show()?>
         </div>
         <?php if(isset($isSummarized)) :?>
         <div class="card-body">

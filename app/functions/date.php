@@ -84,6 +84,15 @@
         return $diff->format("%a days");
     }
 
+    function date_difference_day($date1 , $date2)
+    {
+        $date1 = date_create($date1);
+        $date2 = date_create($date2);
+
+        $diff = date_diff($date1,$date2);
+        return $diff->format("%a");
+    }
+
 
     function timeInMinutesToHours($timeInMinutes , $isHTML = false)
     {

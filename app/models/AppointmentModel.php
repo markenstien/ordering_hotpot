@@ -25,7 +25,7 @@
 			$fillable_datas = $this->getFillablesOnly($appointment_data);
 
 			if(!is_null($id) ){
-				if(!$this->checkAvailability($fillable_datas['date']) || $this->checkDuplicateAppointment($appointment_data)) 
+				if(!$this->checkAvailability($fillable_datas['date']) || $this->checkDuplicateAppointment($appointment_data) || !$this->_checkTimeOfArrival($fillable_datas['start_time'])) 
 				return false;
 				return parent::update($fillable_datas , $id);
 			}else
@@ -37,9 +37,10 @@
 		public function create($appointment_data)
 		{	
 			extract($appointment_data);
-
-			if(!$this->checkAvailability($date) || $this->checkDuplicateAppointment($appointment_data)) 
+			$_fillables = $this->getFillablesOnly($appointment_data);
+			if(!$this->checkAvailability($date) || $this->checkDuplicateAppointment($appointment_data) || !$this->_checkTimeOfArrival($_fillables['start_time'])) {
 				return false;
+			}
 			/*check appointment date if in maximum*/
 
 			$reference =  $this->generateRefence();
@@ -49,8 +50,6 @@
 			$appointment_data['type'] = $type ?? 'online';
 			$appointment_data['remark'] = $remark ?? '';
 			$appointment_data['status'] = $status ?? 'pending';
-
-			$_fillables = $this->getFillablesOnly($appointment_data);
 			$appointment_id = parent::store($_fillables);
 
 			$appointment_link = _route('appointment:show' , $appointment_id);
@@ -232,12 +231,39 @@
 		private function _checkDateDifference($reservationDate) {
 			
 			$dateToday = today();
+
 			$dateDifference = strtotime($reservationDate) - strtotime($dateToday);
 			$dateDifferenceByDay = (($dateDifference / 60) / 60)/24;
 
 			if($dateDifferenceByDay < 0) {
                 $this->addError("Cannot select date, lesser than {$dateToday}");
 				return false;	
+			} elseif(($dateDifferenceByDay) > 180) {
+				$this->addError("we only accept max of 6months Advance booking.");
+				return false;
+			}
+			
+			return true;
+		}
+
+		private function _checkTimeOfArrival($timeOfArrival) {
+			$error = '';
+
+			$early = '10:00'; //9 is the opening
+			$late = '19:00'; //21 is the closing time
+			$timeOfArrivalStrtoTime = strtotime($timeOfArrival);
+
+			if($timeOfArrivalStrtoTime < strtotime($early)) {
+				$error = "You can only book within our operating hours, time too early.";
+			}
+
+			if($timeOfArrivalStrtoTime > strtotime($late)) {
+				$error = "You can only book within our operating hours, time too late.";
+			}
+			
+			if(!empty($error)) {
+				$this->addError($error);
+				return false;
 			}
 			return true;
 		}

@@ -30,6 +30,11 @@
 			if(isSubmitted()) {
 				$post = request()->posts();
 
+				$items = $this->modelOrderItem->getCurrentSession('cart');
+				if(count($items) >= 60) {
+					Flash::set("Max order reached, unable to place your new order", 'danger');
+					return request()->return();
+				}
 				$res  = $this->modelOrderItem->addOrUpdatePurchaseItem([
 					'item_id' => $post['item_id'],
 					'quantity' => $post['quantity'],

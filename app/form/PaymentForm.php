@@ -116,6 +116,12 @@
         }
 
         public function addOrganization() {
+            if(!isset($this->bankOrgModel)) {
+                $this->bankOrgModel = model('BankOrgModel');
+            }
+
+            $banks = $this->bankOrgModel->all();
+            $bankOrgOptions = arr_layout_keypair($banks, ['id', 'bank_name@bank_code']);
             $this->add([
                 'type' => 'text',
                 'name' => 'organization',
@@ -123,6 +129,7 @@
                 'required' => true,
                 'options' => [
                     'label' => 'Organization',
+                    'option_values' => $bankOrgOptions
                 ]
             ]);
         }

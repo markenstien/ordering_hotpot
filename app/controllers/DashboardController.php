@@ -5,6 +5,7 @@
 	{
 		public function __construct()
 		{
+			_authRequired();
 			$this->user_model = model('UserModel');
 			$this->itemModel = model('ItemModel');
 			$this->orderItemModel = model('OrderItemModel');

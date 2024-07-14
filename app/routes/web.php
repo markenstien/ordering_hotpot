@@ -262,5 +262,6 @@
 		'deny' => 'deny',
 	]);
 
+	_routeInstance('bank-org', 'BankOrgController', $routes);
 	return $routes;
 ?>

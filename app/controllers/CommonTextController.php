@@ -42,7 +42,7 @@
                     'text_content' => $post['text_content'],
                     'owner_id' => whoIs('id'),
                     'catalog'  => 'company_reviews',
-                    'is_visible' => false
+                    'is_visible' => true
                 ]);
                 Flash::set('Review Created');
                 return redirect(_route('common-text:show', $resp));

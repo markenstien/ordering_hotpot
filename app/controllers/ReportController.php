@@ -12,17 +12,30 @@
 		public function __construct()
 		{
 			parent::__construct();
+			_authRequired();
 			$this->orderItemModel = model('OrderItemModel');
 			$this->orderModel = model('OrderModel');
 			$this->userModel = model('UserModel');
 			$this->stockModel = model('StockModel');
 		}
 
+		private function isDateRangeValid($startdate, $enddate) {
+			if(strtotime($startdate) > strtotime($enddate)) {
+				Flash::set("Invalid date range", 'danger');
+				return false;
+			}
+			return true;
+		}
+
 		public function salesReport() {
 			$request = request()->inputs();
 			$user = null;
 			$this->data['page_title'] = 'Sales Report';
+
 			if (isset($request['submit'])) {	
+				if(!$this->isDateRangeValid($request['start_date'], $request['end_date'])){
+					return request()->return();
+				}
 				$fetchReport = [
 					'created_at' => [
 						'condition' => 'between',
@@ -104,8 +117,11 @@
 
 		public function stocksReport() {
 			$request = request()->inputs();
-
+			
 			if (isset($request['submit'])) {
+				if(!$this->isDateRangeValid($request['start_date'], $request['end_date'])){
+					return request()->return();
+				}
 				$stockService = new StockService();
 				$highestStockByMaxQuantity = $this->stockModel->getHighestStock([
 					'type' => $stockService::HIGHEST_BY_MAX_QUANTITY,

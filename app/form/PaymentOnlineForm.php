@@ -19,18 +19,22 @@
 		}
 
 		public function addOrganization() {
-			$this->add([
-				'name' => 'organization',
-				'type' => 'text',
-				'options' => [
-					'label' => 'Organizaiton'
-				],
-				'attributes' => [
-					'placeholder' => 'eg. BDO,UNIONBANK, EASTWEST, GCASH'
-				],
-				
-				'class' => 'form-control'
-			]);
+			if(!isset($this->bankOrgModel)) {
+                $this->bankOrgModel = model('BankOrgModel');
+            }
+
+            $banks = $this->bankOrgModel->all();
+            $bankOrgOptions = arr_layout_keypair($banks, ['bank_name', 'bank_name@bank_code']);
+            $this->add([
+                'type' => 'select',
+                'name' => 'organization',
+                'class' => 'form-control',
+                'required' => true,
+                'options' => [
+                    'label' => 'Organization',
+                    'option_values' => $bankOrgOptions
+                ]
+            ]);
 		}
 
 		public function addAccountNumber() {

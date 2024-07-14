@@ -7,6 +7,7 @@
     {
         public function __construct()
         {
+            _authRequired();
             $this->model = model('CategoryModel');
             $this->categoryForm = new CategoryForm();
             $this->data['page_title'] = 'Category';
