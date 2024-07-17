@@ -23,6 +23,8 @@
 			$this->addGuestPhoneNumber();
 			$this->addType();
 			$this->addNotes();
+			$this->addBranch();
+			$this->addNumberOfPerson();
 
 			$this->customSubmit('Reserve');
 		}
@@ -101,6 +103,40 @@
 			// 		]
 			// 	]
 			// ]);
+		}
+
+		public function addBranch()
+		{
+			$this->add([
+				'type' => 'select',
+				'name' => 'branch',
+				'class' => 'form-control',
+				'required' => true,
+				'options' => [
+					'label' => 'branch',
+					'option_values' => [
+						'094 Gen. Trias Dr, Rosario, 4106 Cavite',
+						'Reparo Road Caloocan',
+						'Santa Quiteria Rd Caloocan',
+						'Lhinette Homes, B9 L1, Tanza, 4108 Cavite'
+					]
+				],
+				'attributes' => [
+					'id' => 'branch'
+				]
+			]);
+		}
+
+		public function addNumberOfPerson()
+		{
+			$this->add([
+				'type' => 'text',
+				'name' => 'number_of_people',
+				'class' => 'form-control',
+				'options' => [
+					'label' => 'Number of person'
+				]
+			]);
 		}
 
 		public function addStartTime()

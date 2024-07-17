@@ -32,6 +32,8 @@
 			$user = null;
 			$this->data['page_title'] = 'Sales Report';
 
+			$dateToday = today();
+			
 			if (isset($request['submit'])) {	
 				if(!$this->isDateRangeValid($request['start_date'], $request['end_date'])){
 					return request()->return();
@@ -73,6 +75,12 @@
 
 				$salesReport = new SalesReport();
 				$saleItems = $this->orderItemModel->getItemsByParam($summaryParam);
+				$top10salesChart = [];
+
+				foreach($saleItems as $key => $row) {
+					$top10salesChart[$row->item_name] = $row->quantity;
+				}
+
 				$highestSellingInQuantity = $this->orderItemModel->getLowestOrHighest($summaryParam, OrderItemModel::CATEGORY_QUANTITY,'desc'
 				);
 				$lowestSellingInQuantity = $this->orderItemModel->getLowestOrHighest(
@@ -104,7 +112,9 @@
 					'lowestSellingInAmount' => $lowestSellingInAmount,
 					'salesSummary' => $salesSummary,
 					'today' => now(),
-					'user'  => whoIs(['firstname','lastname'])
+					'user'  => whoIs(['firstname','lastname']),
+					'salesPerMonth' => $salesReport->computeSalesPerMonth($orders),
+					'top10salesChart' => $top10salesChart,
 				];
 			}
 

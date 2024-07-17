@@ -75,7 +75,7 @@
 			if(isEqual($auth->user_type , 'customer')){
 				$appointments = $this->model->all([
 					'user_id' => $auth->id
-				], "FIELD(status, 'scheduled', 'pending', 'arrived', 'cancelled') asc, date desc");
+				],	 "FIELD(status, 'scheduled', 'pending', 'arrived', 'cancelled') asc, id desc ,date desc");
 			}else{
 				$appointments = $this->model->all(null, "FIELD(status, 'scheduled', 'pending', 'arrived', 'cancelled') asc, id desc, date desc");
 			}

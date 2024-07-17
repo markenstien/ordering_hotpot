@@ -17,7 +17,9 @@
 			'guest_phone',
 			'status',
 			'notes',
-			'reservation_fee'
+			'reservation_fee',
+			'branch',
+			'number_of_people',
 		];
 
 		public function save($appointment_data , $id = null)
@@ -44,12 +46,11 @@
 			/*check appointment date if in maximum*/
 
 			$reference =  $this->generateRefence();
-
-			$appointment_data['reference'] = $reference;
-			$appointment_data['user_id'] = $user_id ?? '';
-			$appointment_data['type'] = $type ?? 'online';
-			$appointment_data['remark'] = $remark ?? '';
-			$appointment_data['status'] = $status ?? 'pending';
+			$_fillables['reference'] = $reference;
+			$_fillables['user_id'] = $user_id ?? '';
+			$_fillables['type'] = $type ?? 'online';
+			$_fillables['remark'] = $remark ?? '';
+			$_fillables['status'] = $status ?? 'pending';
 			$appointment_id = parent::store($_fillables);
 
 			$appointment_link = _route('appointment:show' , $appointment_id);

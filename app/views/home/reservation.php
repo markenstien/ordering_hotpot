@@ -29,6 +29,14 @@
             </div>
 
             <div class="form-group">
+                <?php echo $appointmentForm->getRow('branch')?>
+            </div>
+
+            <div class="form-group">
+                <?php echo $appointmentForm->getRow('number_of_people')?>
+            </div>
+
+            <div class="form-group">
                 <?php echo $appointmentForm->getRow('start_time')?>
             </div>
 
@@ -47,5 +55,13 @@
     </div>
 </div>
 
+<?php endbuild()?>
+
+<?php build('styles') ?>
+ <style>
+    #branch{
+        background-color: #fff;
+    }
+ </style>
 <?php endbuild()?>
 <?php loadTo('tmp/landing')?>

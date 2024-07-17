@@ -6,7 +6,7 @@
         </div>
         <?php if(isset($isSummarized)) :?>
         <div class="card-body">
-            <div class="col-md-7">
+            <div class="col-md-9 mx-auto">
                 <div class="report_container">    
                     <section class="header">
                         <div class="text-center">
@@ -108,6 +108,13 @@
                             </tbody>
                         </table>
                     </section>
+
+                    <section class="summary mt-5">
+                        <h4 class="mt-2">Sales Graph</h4>
+                        <div class="card-body">
+                            <div id="itemReportPie"></div>
+                        </div>
+                    </section>
                 </div>
             </div>
 
@@ -132,5 +139,69 @@
         </div>
         <?php endif?>
     </div>
+<?php endbuild()?>
+
+<?php build('scripts') ?>
+	<script src="<?php echo _path_tmp('main-tmp/assets/vendors/apexcharts/apexcharts.min.js')?>"></script>
+	<script>
+		  var itemstop10Keys = ['<?php echo implode("','", array_keys($reportData['top10salesChart']))?>'];
+		  var itemstop10Values = [<?php echo implode(",", array_values($reportData['top10salesChart']))?>];
+		  
+		  var colors = {
+			primary        : "#6571ff",
+			secondary      : "#7987a1",
+			success        : "#05a34a",
+			info           : "#66d1d1",
+			warning        : "#fbbc06",
+			danger         : "#ff3366",
+			light          : "#e9ecef",
+			dark           : "#060c17",
+			muted          : "#7987a1",
+			gridBorder     : "rgba(77, 138, 240, .15)",
+			bodyColor      : "#000",
+			cardBg         : "#fff"
+		}
+
+		var fontFamily = "'Roboto', Helvetica, sans-serif"
+
+		if ($('#itemReportPie').length) {
+			var options = {
+			chart: {
+				height: 300,
+				type: "pie",
+				foreColor: colors.bodyColor,
+				background: colors.cardBg,
+				toolbar: {
+				show: false
+				},
+			},
+			theme: {
+				mode: 'light'
+			},
+			tooltip: {
+				theme: 'light'
+			},
+			colors: [colors.primary,colors.warning,colors.danger, colors.info],
+			legend: {
+				show: true,
+				position: "top",
+				horizontalAlign: 'center',
+				fontFamily: fontFamily,
+				itemMargin: {
+				horizontal: 8,
+				vertical: 0
+				},
+			},
+			stroke: {
+				colors: ['rgba(0,0,0,0)']
+			},
+			series: itemstop10Values,
+			labels : itemstop10Keys
+			};
+			
+			var chart = new ApexCharts(document.querySelector("#itemReportPie"), options);
+			chart.render();  
+		}
+	</script>
 <?php endbuild()?>
 <?php loadTo()?>
