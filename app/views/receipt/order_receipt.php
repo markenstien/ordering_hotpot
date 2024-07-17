@@ -186,20 +186,78 @@
                     data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
             <div class="modal-body">
-                <?php echo $paymentForm->start()?>
-                    <?php echo $paymentForm->getCol('order_id')?>
-                    <?php echo $paymentForm->getCol('payer_name')?>
-                    <?php echo $paymentForm->getCol('amount')?>
-                    <?php echo $paymentForm->getCol('payment_type')?>
-                    <?php echo $paymentOnlineForm->getCol('external_reference')?>
-                    <?php echo $paymentOnlineForm->getCol('organization')?>
-                    <?php echo $_attachmentForm->getCol('file')?>
+                <section>
+                    <div>
+                        <h3>Gcash Or Attach Payment</h3>
+                        <a href="#" data-target="paymentAttachment" class="show-hide">Pay using this.</a>
+                    </div>
+                    <div id="paymentAttachment" style="display: none;">
+                        <?php echo $paymentForm->start()?>
+                            <?php echo $paymentForm->getCol('order_id')?>
+                            <?php echo $paymentForm->getCol('payer_name')?>
+                            <?php echo $paymentForm->getCol('amount')?>
+                            <?php echo $paymentForm->getCol('payment_type')?>
+                            <?php echo $paymentOnlineForm->getCol('external_reference')?>
+                            <?php echo $paymentOnlineForm->getCol('organization')?>
+                            <?php echo $_attachmentForm->getCol('file')?>
 
-                    <input type="submit" name="" value="Add Payment" class="btn btn-primary btn-sm mt-3">
-                <?php echo $paymentForm->end()?>
+                            <div id="scanPaypal">
+                                <div class="text-center mt-3">
+                                    <a href="#" class="btn btn-sm btn-info show-hide" data-target="gcashQR">
+                                        Show Gcash QR</a>
+                                </div>
+                                <div id="gcashQR" style="display: none; margin-top:10px;">
+                                    <p>Pay using this qr code, attach your payment proof on this form and submit.</p>
+                                    <img src="<?php echo _path_upload_get('images/gcash_merchant_qr.jpg')?>" 
+                                    alt=""
+                                    style="width: 250px; margin:0px auto; display:block;">
+                                </div>
+                            </div>
+                            <input type="submit" name="" value="Add Payment" class="btn btn-primary btn-sm mt-3">
+                        <?php echo $paymentForm->end()?>
+                    </div>
+                </section>
+
+                <?php echo wDivider(50) ?>
+                <section>
+                    <div>
+                        <h3>Debit/Credit/Paypal</h3>
+                        <p>Pay Via Paypal Merchant</p>
+                    </div>
+
+                    <div >
+                        <form action="" method="post"> 
+                            <!-- Identify your business so that you can collect the payments. --> 
+                            <input type="hidden" name="business" value="<?php echo MAILER_AUTH['username']?>"> 
+                            <!-- Specify a Buy Now button. --> 
+                            <input type="hidden" name="cmd" value="_xclick"> 
+                            <!-- Specify details about the item that buyers will purchase. --> 
+                            <input type="hidden" name="item_name" value="ORDER PAYMENT FROM DAILYGRILL"> 
+                            <input type="hidden" name="amount" value="<?php echo $order->net_amount?>"> 
+                            <input type="hidden" name="currency_code" value="PHP"> 
+
+                            <div class="text-center">
+                                <button type="submit" name="paypal_pay_button"  
+                                    title="PayPal - The safer, easier way to pay online!"
+                                    style="background-color: #fec439; border:0px; outline:0px;
+                                        padding:10px 15px; margin-top:30px">Redirect To Paypal Portal</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
             </div>
         </div>
         </div>
     </div>
+<?php endbuild()?>
+
+<?php build('scripts')?>
+    <script>
+        $(document).ready(function(){
+            $('.show-hide').click(function(e){
+                $('#' + $(this).data('target')).toggle();
+            });
+        });
+    </script>
 <?php endbuild()?>
 <?php loadTo()?>

@@ -15,7 +15,10 @@
         'replyToName' => 'Hotplate'
     ];
 
-
+    const PAYPAL_AUTH = [
+        'PAYPALCLIENTID' => 'ARnKR0deOEPdb-FwGEXty9ueXCBopZ1M9kQFy7dGTMNrx3BUSTDMvqtEYehBNa_pFPldmsxLVZVd8mri', 
+        'PAYPALCLIENTSECRET' => 'ECSf5tHaj-aUA_imf5Zd1jOGf7RaWNth0ON-onpBlsquhQwitxTFnNbbjVRqhR6YXm5WOWmjtV6-uJdl', 
+    ];
 
     const ITEXMO = [
         'key' => '',

@@ -1,5 +1,6 @@
-<?php 
-
+<?php
+    use Omnipay\Omnipay;
+    require_once LIBS.DS.'omnipay/vendor/autoload.php';
     class PaymentController extends Controller
     {
         public function __construct()
@@ -9,6 +10,66 @@
             $this->modelOrder = model('OrderModel');
         }
 
+
+        public function paypalResponse() {
+            $req = request()->inputs();
+
+            $gateway = Omnipay::create('PayPal_Rest');
+            $gateway->setClientId(PAYPAL_AUTH['PAYPALCLIENTID']);
+            $gateway->setSecret(PAYPAL_AUTH['PAYPALCLIENTSECRET']);
+            $gateway->setTestMode(true);    
+
+            if((isset($req['paymentId'], $req['PayerID']))) {
+
+                $paymentDataPaylaod = $req['PAYMENT_DATA_PAYLOAD'];
+                $paymentDataPaylaod = unseal($paymentDataPaylaod);
+
+                $amountPaid = $paymentDataPaylaod['amount_paid'];
+                $orderId = $paymentDataPaylaod['order_id'];
+
+                //order data
+                
+                
+                $transaction = $gateway->completePurchase(array(
+                    'payer_id' => $req['PayerID'],
+                    'transactionReference' => $req['paymentId'],
+                ));
+        
+                $response = $transaction->send();
+
+                if($response->isSuccessful()) {
+                    $responseData = $response->getData();
+                    $externalReference = $responseData['id'];
+                    $order = $this->modelOrder->get($orderId);
+
+                    $paymentData = [
+                        'order_id'  => $order->id,
+                        'amount'  => $amountPaid,
+                        'account_name' => $order->customer_name,
+                        'payment_method'  => 'ONLINE',
+                        'mobile_number'  => $order->mobile_number,
+                        'address'  => $order->address,
+                        'remarks'  => 'ORDER PAID VIA PAYPAL',
+                        'organization'  => 'PAYPAL',
+                        'account_number'  => $responseData['id'],
+                        'external_reference'  => $responseData['cart'],
+                        'created_by'  => today(),
+                        'remarks' => 'approved'
+                    ];
+
+                    $paymentId = $this->model->createOrUpdate($paymentData);
+
+                    if($paymentId) {
+                        Flash::set("Payment Successfull");
+                        $this->model->approve($paymentId);
+                    } else {
+                        Flash::set($this->model->getErrorString(), 'danger');
+                        return request()->return();
+                    }
+                    return redirect(_route('receipt:order', $orderId));
+                }
+            }
+        }
 
         public function create() {
             if(isSubmitted()) {

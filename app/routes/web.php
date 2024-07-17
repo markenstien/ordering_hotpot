@@ -125,7 +125,8 @@
 		'delete' => $controller.'/destroy',
 		'show'   => $controller.'/show',
 		'approve' => $controller .'/approve',
-		'invalidate'   => $controller . '/invalidate'
+		'invalidate'   => $controller . '/invalidate',
+		'paypal-response' => $controller . '/paypalResponse'
 	];
 
 	$controller = '/SupplyOrderController';
