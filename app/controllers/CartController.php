@@ -32,7 +32,7 @@
 				$items = $this->modelOrderItem->getCurrentSession('cart');
 
 				if($post['quantity'] > 60) {
-					Flash::set("Max order reached, unable to place your new order", 'danger');
+					Flash::set("Max order reached (60) items, unable to place your new order", 'danger');
 					return request()->return();
 				}
 				if(count($items) >= 50) {
