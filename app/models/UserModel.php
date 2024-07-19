@@ -131,7 +131,7 @@
 		{
 			$res = $this->save($user_data);
 			if(!$res) {
-				$this->addError("Unable to create user");
+				// $this->addError("Unable to create user");
 				return false;
 			}
 			if(!empty($profile) )
@@ -239,19 +239,18 @@
 		}
 
 
-		public function authenticate($email , $password)
+		public function authenticate($email , $password, $user_type = null)
 		{
-			$errors = [];
-
 			$user = parent::get(['email' => $email]);
 
 			if(!$user) {
-				$errors[] = " Email '{$email}' does not exists in any account";
+				$this->addError("Email '{$email}' does not exists in any account");
 				return false;
 			}
 
 			if(!isEqual($user->password ?? '' , $password)){
-				$errors[] = " Incorrect Password ";
+				$this->addError("Incorrect Password");
+				return false;
 			}
 
 			if(!$user->is_verified) {
@@ -261,9 +260,11 @@
 				return false;
 			}
 
-			if(!empty($errors)){
-				$this->addError( implode(',', $errors));
-				return false;
+			if(!is_null($user_type)) {
+				if(!isEqual($user->user_type, $user_type)) {
+					$this->addError("User not found");
+					return false;
+				}
 			}
 
 			return $this->startAuth($user->id);

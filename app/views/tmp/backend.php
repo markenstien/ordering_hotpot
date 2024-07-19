@@ -20,10 +20,6 @@
 <link rel="stylesheet" href="<?php echo _path_tmp('main-tmp/assets/vendors/core/core.css')?>">
 <!-- endinject -->
 
-<!-- Plugin css for this page -->
-  <link rel="stylesheet" href="<?php echo _path_tmp('main-tmp/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')?>">
-    <!-- End plugin css for this page -->
-
 <!-- inject:css -->
 <link rel="stylesheet" href="<?php echo _path_tmp('main-tmp/assets/fonts/feather-font/css/iconfont.css')?>">
 <link rel="stylesheet" href="<?php echo _path_tmp('main-tmp/assets/vendors/flag-icon-css/css/flag-icon.min.css')?>">
@@ -34,6 +30,9 @@
 <!-- End layout styles -->
 
 <link rel="shortcut icon" href="<?php echo _path_tmp('main-tmp/assets/images/favicon.png')?>" />
+
+<link rel='styesheet' href='https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css'>
+  <link rel='styesheet' href='https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css'>
 
   <?php produce('styles')?>
   
@@ -247,7 +246,6 @@
         <!-- partial -->
     
         <div class="page-wrapper">
-
             <div class="page-content">
                 <?php echo produce('content')?>
             </div>
@@ -281,35 +279,38 @@
     <!-- Plugin js for this page -->
     <script src="<?php echo _path_tmp('main-tmp/assets/vendors/datatables.net/jquery.dataTables.js')?>"></script>
     <script src="<?php echo _path_tmp('main-tmp/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')?>"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+
+
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <script src=" https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+
+    
 
     <script type="text/javascript" defer>
-        $(function() {
-          'use strict';
-
-          $(function() {
-            $('.dataTable').DataTable({
-              "aLengthMenu": [
-                [10, 30, 50, -1],
-                [10, 30, 50, "All"]
-              ],
-              "iDisplayLength": 10,
-              "language": {
-                search: ""
-              }
-            });
-            $('.dataTable').each(function() {
-              var datatable = $(this);
-              // SEARCH - Add the placeholder for Search and Turn this into in-line form control
-              var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
-              search_input.attr('placeholder', 'Search');
-              search_input.removeClass('form-control-sm');
-              // LENGTH - Inline-Form control
-              var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
-              length_sel.removeClass('form-control-sm');
-            });
-          });
-
-        });
+       $(function() {
+        <?php
+            if(isEqual(whoIs('user_type'), ['admin','staff','supervisor'])) {
+              print <<<EOF
+                new DataTable('.dataTable', {
+                    layout: {
+                        bottomEnd: {
+                            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                        }
+                    }
+                });
+              EOF;
+            } else {
+              print <<<EOF
+                new DataTable('.dataTable');
+              EOF;
+            }
+          ?>
+      });
     </script>
     <!-- Custom js for this page -->
   <!-- End custom js for this page -->

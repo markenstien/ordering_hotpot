@@ -50,7 +50,8 @@
 		'logout' => $controller.'/logout',
 		'forgot-password' => $controller .'/forgotPassword',
 		'code'  => $controller.'/code',
-		'requestActivationCode' => $controller . '/requestActivationCode'
+		'requestActivationCode' => $controller . '/requestActivationCode',
+		'admin-login' => 'admin_login'
 	];
 
 	$controller = '/AttachmentController';

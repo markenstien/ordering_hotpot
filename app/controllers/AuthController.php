@@ -29,14 +29,50 @@
 			return $this->login();
 		}
 
+		public function admin_login() {
+			$this->requireTerms();
+			if(isSubmitted())
+			{
+				$post = request()->posts();
+				$res = $this->user->authenticate($post['email'] , $post['password'], 'admin');
+
+				if(!$res) {
+					Flash::set( $this->user->getErrorString() , 'danger');
+					return request()->return();
+				}else
+				{
+					Flash::set( "Welcome Back !" . auth('first_name'));
+				}
+
+				return redirect('DashboardController');
+			}
+
+			if(!empty(whoIs())) {
+				return redirect(_route('user:profile'));
+			}
+			$form = $this->_form;
+
+			$form->init([
+				'url' => _route('auth:admin-login')
+			]);
+
+			$form->customSubmit('Login' , 'submit' , ['class' => 'btn btn-primary btn-sm']);
+
+			$data = [
+				'title' => 'Login Page',
+				'form'  => $form
+			];
+
+			return $this->view('auth/admin_login' , $data);
+		}
+
 		public function login()
 		{
 			$this->requireTerms();
 			if(isSubmitted())
 			{
 				$post = request()->posts();
-
-				$res = $this->user->authenticate($post['email'] , $post['password']);
+				$res = $this->user->authenticate($post['email'] , $post['password'], ['customer','staff','supervisor']);
 
 				if(!$res) {
 					Flash::set( $this->user->getErrorString() , 'danger');

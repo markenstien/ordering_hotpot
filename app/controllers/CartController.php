@@ -29,9 +29,13 @@
 		public function addToCart() {
 			if(isSubmitted()) {
 				$post = request()->posts();
-
 				$items = $this->modelOrderItem->getCurrentSession('cart');
-				if(count($items) >= 60) {
+
+				if($post['quantity'] > 60) {
+					Flash::set("Max order reached, unable to place your new order", 'danger');
+					return request()->return();
+				}
+				if(count($items) >= 50) {
 					Flash::set("Max order reached, unable to place your new order", 'danger');
 					return request()->return();
 				}
