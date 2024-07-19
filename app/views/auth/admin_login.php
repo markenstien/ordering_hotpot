@@ -3,7 +3,7 @@
 		<div class="container my-5 py-5">
 			<div class="row align-items-center g-5">
 				<div class="col-lg-6 text-center text-lg-start">
-					<h1 class="display-3 text-white animated slideInLeft">Welcome to <br/> <?php echo COMPANY_NAME?></h1>
+					<h1 class="display-3 text-white animated slideInLeft">ADMIN LOGIN</h1>
 				</div>
 				<div class="col-lg-6 text-center text-lg-end overflow-hidden">
 					<img class="img-fluid" src="img/hero.png" alt="">
@@ -15,9 +15,9 @@
 <div class="container py-5">
   <div class="col-md-6 mx-auto">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="background-color: #eee;">
             <?php Flash::show()?>
-            <h5 class="text-muted fw-normal mb-4">ADMIN LOGIN.</h5>
+            <h5 class="text-muted fw-normal mb-4">Welcome Admin.</h5>
             <?php  __( $form->start() ); ?>
               <div class="mb-3">
                 <?php __( $form->getCol('email' , ['required' => true]) ); ?>
@@ -33,6 +33,14 @@
       </div>
   </div>
 </div>
+<?php endbuild()?>
+
+<?php build('styles') ?>
+  <style>
+    #testimonials {
+      display: none;
+    }
+</style>
 <?php endbuild()?>
 <?php loadTo('tmp/landing')?>
 
